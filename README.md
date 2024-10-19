@@ -9,3 +9,4 @@ Currently, two official plugins are available:
 # AQAR
 # AqarCity
 # AqarCity
+# AqarCity
