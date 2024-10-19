@@ -18,6 +18,9 @@ export default function Login() {
   const submit = async (data) => {
     try {
       const res = await axios.post(USERS_URL.login, data);
+      const token=res.data.token
+      console.log(res.data.token);
+      localStorage.setItem("token",token)
       toast.success("Sign in Successfully");
     } catch (error) {
       toast.error("Sign in Failed. Please check your credentials and try again.");
@@ -37,6 +40,10 @@ export default function Login() {
   const handleLoginFailure = (error) => {
     toast.error("Login Failed: " + error);
   };
+
+
+// Ax55tvn5
+
 
   const form = () => {
     return (
@@ -64,7 +71,7 @@ export default function Login() {
                     <input
                       type="email"
                       className={`form-control ${errors.email ? "is-invalid" : ""}`}
-                      {...register("email", {
+                      {...register("login", {
                         required: "Email is required",
                         pattern: {
                           value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -77,9 +84,9 @@ export default function Login() {
                     <label htmlFor="email" className="form-label">
                       Email
                     </label>
-                    {errors.email && (
+                    {errors.login && (
                       <div className="invalid-feedback">
-                        {errors.email.message}
+                        {errors.login.message}
                       </div>
                     )}
                   </div>
@@ -103,7 +110,7 @@ export default function Login() {
                     )}
                   </div>
                 </div>
-                <div className="col-12">
+                {/* <div className="col-12">
                   <div className="form-check">
                     <input
                       className="form-check-input"
@@ -118,7 +125,7 @@ export default function Login() {
                       Keep me logged in
                     </label>
                   </div>
-                </div>
+                </div> */}
                 <div className="col-12">
                   <div className="d-grid">
                     <button className="btn btn-dark btn-lg" type="submit">

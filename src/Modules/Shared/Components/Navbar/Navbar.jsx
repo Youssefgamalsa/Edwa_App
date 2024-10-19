@@ -18,19 +18,17 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
 const pages = [
-  { name: 'اضافة شقة', link: '/products' },
-  { name: 'اضافة ارض', link: '/pricing' },
-  { name: 'اضافة مبني سكنس', link: '/blog' }
+  { name: 'اضافة شقة', link: '/showdata' },
+  { name: 'اضافة ارض', link: '/add-land' },
+  { name: 'اضافة مبني سكني', link: '/add-building' }
 ];
 
 const settings = [
   { name: 'Profile', link: '/profile' },
-  { name: 'Account', link: '/account' },
-  { name: 'Dashboard', link: '/dashboard' },
   { name: 'Logout', link: '/logout' }
 ];
 
-function ResponsiveAppBar() {
+function Navbar() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -44,6 +42,7 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    setDrawerOpen(false);
   };
 
   return (
@@ -91,8 +90,8 @@ function ResponsiveAppBar() {
                 <Divider />
                 <List>
                   {pages.map((page) => (
-                    <ListItem button key={page.name} component={Link} to={page.link}>
-                      <Typography sx={{ textAlign: 'right', padding: 2 , color:"#000" }}>
+                    <ListItem key={page.name} component={Link} to={page.link} onClick={toggleDrawer(false)}>
+                      <Typography sx={{ textAlign: 'right', padding: 2, color: "#000" }}>
                         {page.name}
                       </Typography>
                     </ListItem>
@@ -101,8 +100,8 @@ function ResponsiveAppBar() {
                 <Divider />
                 <List>
                   {settings.map((setting) => (
-                    <ListItem button key={setting.name} component={Link} to={setting.link}>
-                      <Typography sx={{ textAlign: 'right', padding: 2 , color:"#000" }}>
+                    <ListItem key={setting.name} component={Link} to={setting.link} onClick={toggleDrawer(false)}>
+                      <Typography sx={{ textAlign: 'right', padding: 2, color: "#000" }}>
                         {setting.name}
                       </Typography>
                     </ListItem>
@@ -181,4 +180,4 @@ function ResponsiveAppBar() {
   );
 }
 
-export default ResponsiveAppBar;
+export default Navbar;
