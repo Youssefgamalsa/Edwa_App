@@ -1,28 +1,58 @@
-import {
-  Button,
-  TextField,
-  Typography,
-  Box,
-} from "@mui/material";
+import { Button, TextField, Typography, Box } from "@mui/material";
 import { useForm } from "react-hook-form";
+// import axios from "axios";
+// import { ADDMODULE_URL } from "../../Api/Api"; // افترض وجود رابط API صحيح
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
-import { ADDMODULE_URL } from "../../Api/Api"; // افترض وجود رابط API صحيح
 
 export default function ShowAqar() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  // الحصول على التوكن
+  const nav = useNavigate();
+
   const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (!token) {
+      nav("/auth/login");
+    }
+  }, [token, nav]);
+
+  const append_to_form_data = (data) => {
+    let formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("location", data.location);
+    formData.append("price", data.price);
+    formData.append("area", data.area);
+    formData.append("bedrooms", data.bedrooms);
+    formData.append("bathrooms", data.bathrooms);
+    formData.append("type", "partment");
+    formData.append("images", data.images);
+    formData.append("status", data.status);
+  };
 
   // إرسال البيانات إلى الخادم
   const submit = async (data) => {
+    console.log(data);
+    const form_data = append_to_form_data(data);
+    // console.log(form_data);
     try {
-      const response = await axios.post(ADDMODULE_URL.build, data, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
+      const response = await axios.post(
+        "https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property",
+        form_data,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
       console.log("Response:", response);
+      toast.success("Real State Created Successfully ");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -44,7 +74,33 @@ export default function ShowAqar() {
         اضافة العقار
       </Typography>
 
-      <form className="shadow col-lg-9 m-auto p-4" onSubmit={handleSubmit(submit)}>
+      <form
+        className="shadow col-lg-9 m-auto p-4"
+        onSubmit={handleSubmit(submit)}
+      >
+        <select
+          className="form-select  w-100 text-md-left text-center"
+          style={{ marginBottom: "30px" }}
+          {...register("status", { required: "نوع العقد مطلوب " })}
+        >
+          <option selected>نوع العقد </option>
+          <option value="rent"> ايجار </option>
+          <option value="sell"> للبيع </option>
+        </select>
+        <Box mb={3}>
+          <TextField
+            id="title"
+            label="title"
+            type="text"
+            fullWidth
+            variant="outlined"
+            placeholder="base title "
+            {...register("title", { required: "السعر مطلوب" })}
+            error={!!errors.title}
+            helperText={errors.title ? errors.title.message : ""}
+            sx={{ bgcolor: "#f0f4ff" }}
+          />
+        </Box>
         {/* السعر */}
         <Box mb={3}>
           <TextField
@@ -53,14 +109,13 @@ export default function ShowAqar() {
             type="text"
             fullWidth
             variant="outlined"
-            placeholder="جنيه"
+            placeholder=" السعر جنيه"
             {...register("price", { required: "السعر مطلوب" })}
             error={!!errors.price}
             helperText={errors.price ? errors.price.message : ""}
             sx={{ bgcolor: "#f0f4ff" }}
           />
         </Box>
-
         {/* المساحة وسعر المتر */}
         <Box display="flex" justifyContent="space-between" mb={3}>
           <TextField
@@ -74,7 +129,6 @@ export default function ShowAqar() {
             sx={{ bgcolor: "#f0f4ff", width: "100%" }}
           />
         </Box>
-
         {/* العنوان */}
         <Box mb={3}>
           <TextField
@@ -83,13 +137,38 @@ export default function ShowAqar() {
             fullWidth
             variant="outlined"
             placeholder="العنوان بالتفصيل"
-            {...register("address", { required: "العنوان مطلوب" })}
-            error={!!errors.address}
-            helperText={errors.address ? errors.address.message : ""}
+            {...register("location", { required: "العنوان مطلوب" })}
+            error={!!errors.location}
+            helperText={errors.location ? errors.location.message : ""}
             sx={{ bgcolor: "#f0f4ff" }}
           />
         </Box>
-
+        <Box display="flex" justifyContent="space-between" mb={3}>
+          <TextField
+            id="bedrooms"
+            label="عدد الغرف الرءيسيه "
+            variant="outlined"
+            placeholder=" عدد الغرف الرءيسيه  "
+            {...register("bedrooms", {
+              required: "عدد الغرف الرءيسيه مطلوبة  ",
+            })}
+            error={!!errors.bedrooms}
+            helperText={errors.bedrooms ? errors.bedrooms.message : ""}
+            sx={{ bgcolor: "#f0f4ff", width: "100%" }}
+          />
+        </Box>{" "}
+        <Box display="flex" justifyContent="space-between" mb={3}>
+          <TextField
+            id="bathrooms"
+            label=" عدد الحمامات "
+            variant="outlined"
+            placeholder=" عدد الحمامات "
+            {...register("bathrooms", { required: "عدد الحمامات مطلوبة" })}
+            error={!!errors.bathrooms}
+            helperText={errors.bathrooms ? errors.bathrooms.message : ""}
+            sx={{ bgcolor: "#f0f4ff", width: "100%" }}
+          />
+        </Box>
         {/* الوصف */}
         <Box mb={3}>
           <TextField
@@ -106,7 +185,6 @@ export default function ShowAqar() {
             sx={{ bgcolor: "#f0f4ff" }}
           />
         </Box>
-
         {/* رفع الصورة */}
         <Box mb={4} sx={{ position: "relative" }}>
           <Typography variant="h6" color="error" mb={2}>
@@ -128,7 +206,7 @@ export default function ShowAqar() {
             </Typography>
             <input
               type="file"
-              {...register("image", { required: "الصورة مطلوبة" })}
+              {...register("images", { required: "الصورة مطلوبة" })}
               style={{
                 opacity: 0,
                 position: "absolute",
@@ -141,8 +219,6 @@ export default function ShowAqar() {
             />
           </Box>
         </Box>
-
-        {/* الأزرار */}
         <Box display="flex" justifyContent="center" gap={2}>
           <Button
             variant="outlined"

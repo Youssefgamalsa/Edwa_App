@@ -1,13 +1,14 @@
-import React from "react";
+// import React from "react";
 import img from "../../../../assets/img/image.jpg";
 import AuthComponent from "../../../Usable/Component/AuthComponent/AuthComponent";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { USERS_URL } from "../../../../Api/Api";
+// import { USERS_URL } from "../../../../Api/Api";
 
 export default function Register() {
+  const nav = useNavigate();
   const {
     register,
     handleSubmit,
@@ -20,16 +21,23 @@ export default function Register() {
 
   // submit
   const submit = async (data) => {
+    console.log(data);
     try {
-      const res = await axios.post(USERS_URL.register, data, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
+      const res = await axios.post(
+        "https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/auth/signup",
+        data,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      console.log(res);
       toast.success("Sign Up Successfully");
+      nav('/auth/verify');
     } catch (error) {
       console.log(error);
-      toast.error("Sign Up Failed");
+      toast.error(error.response.data.errorr);
     }
   };
 
@@ -58,7 +66,9 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="text"
-                      className={`form-control ${errors.firstName ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.firstName ? "is-invalid" : ""
+                      }`}
                       {...register("firstName", {
                         required: "First name is required",
                       })}
@@ -67,7 +77,7 @@ export default function Register() {
                     />
                     <label htmlFor="firstName">First name</label>
                     {errors.firstName && (
-                      <div className="invalid-feedback"  >
+                      <div className="invalid-feedback">
                         {errors.firstName.message}
                       </div>
                     )}
@@ -79,7 +89,9 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="text"
-                      className={`form-control ${errors.lastName ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.lastName ? "is-invalid" : ""
+                      }`}
                       {...register("lastName", {
                         required: "Last name is required",
                       })}
@@ -88,7 +100,7 @@ export default function Register() {
                     />
                     <label htmlFor="lastName">Last name</label>
                     {errors.lastName && (
-                      <div className="invalid-feedback"  >
+                      <div className="invalid-feedback">
                         {errors.lastName.message}
                       </div>
                     )}
@@ -100,7 +112,9 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="text"
-                      className={`form-control ${errors.phone ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.phone ? "is-invalid" : ""
+                      }`}
                       {...register("phone", {
                         required: "Phone number is required",
                       })}
@@ -109,7 +123,7 @@ export default function Register() {
                     />
                     <label htmlFor="phonenumber">Phone number</label>
                     {errors.phone && (
-                      <div className="invalid-feedback"  >
+                      <div className="invalid-feedback">
                         {errors.phone.message}
                       </div>
                     )}
@@ -121,11 +135,14 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="email"
-                      className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.email ? "is-invalid" : ""
+                      }`}
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
-                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                          value:
+                            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                           message: "Invalid email format",
                         },
                       })}
@@ -134,7 +151,7 @@ export default function Register() {
                     />
                     <label htmlFor="email">Email</label>
                     {errors.email && (
-                      <div className="invalid-feedback"  >
+                      <div className="invalid-feedback">
                         {errors.email.message}
                       </div>
                     )}
@@ -146,12 +163,15 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="password"
-                      className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.password ? "is-invalid" : ""
+                      }`}
                       {...register("password", {
                         required: "Password is required",
                         pattern: {
                           value: /^[1-9a-zA-Z]{3,10}$/, // تحقق من نمط كلمة المرور
-                          message: "Password must be 3-10 characters long and include letters and numbers",
+                          message:
+                            "Password must be 3-10 characters long and include letters and numbers",
                         },
                       })}
                       id="password"
@@ -159,7 +179,7 @@ export default function Register() {
                     />
                     <label htmlFor="password">Password</label>
                     {errors.password && (
-                      <div className="invalid-feedback"  >
+                      <div className="invalid-feedback">
                         {errors.password.message}
                       </div>
                     )}
@@ -171,18 +191,21 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="password"
-                      className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.confirmPassword ? "is-invalid" : ""
+                      }`}
                       {...register("confirmPassword", {
                         required: "Confirm Password is required",
                         validate: (value) =>
-                          value === getValues("password") || "Passwords do not match",
+                          value === getValues("password") ||
+                          "Passwords do not match",
                       })}
                       id="confirmPassword"
                       placeholder="Confirm Password"
                     />
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     {errors.confirmPassword && (
-                      <div className="invalid-feedback"  >
+                      <div className="invalid-feedback">
                         {errors.confirmPassword.message}
                       </div>
                     )}

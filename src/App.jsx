@@ -29,6 +29,7 @@ function App() {
         {path:"add-building",element:<AddBuilding/>},
         {path:"add-land",element:<AddLand/>},
         {path:"profile",element:<Profile/>},
+        {path:":id",element:<CardFormat/>},
       ],
     },
     {
@@ -41,7 +42,7 @@ function App() {
         {path:"forget-password",element:<ForgetPassword/>},
         {path:"change-password",element:<ChangePassword/>},
         // {path:"reset-password",element:<ResetPassword/>},
-        {path:"verfiy",element:<Verify/>},
+        {path:"verify",element:<Verify/>},
       ],
     },
   ]);

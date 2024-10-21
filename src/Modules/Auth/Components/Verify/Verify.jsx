@@ -1,10 +1,11 @@
-import React from 'react';
+// import React from 'react';
 import img from "../../../../assets/img/image.jpg";
 import AuthComponent from '../../../Usable/Component/AuthComponent/AuthComponent';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { USERS_URL } from '../../../../Api/Api';
+import { useNavigate } from 'react-router-dom';
 
 export default function Verify() {
   const {
@@ -12,12 +13,15 @@ export default function Verify() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const nav = useNavigate()
 
   // Submit handler
   const submit = async (data) => {
     try {
       const res = await axios.post(USERS_URL.verfiy, data);
       toast.success("verfiy successfully");
+      nav('/auth/login');
+      console.log(res);
     } catch (error) {
       console.error(error);
       toast.error("Failed verfiy email");

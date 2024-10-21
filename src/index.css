@@ -19,3 +19,12 @@ body {
 .text-main {
   color: var(--primary-color);
 }
+.search_bar {
+  width: 80%;
+  margin: auto;
+  direction: rtl;
+  display: grid;
+  gap: 30px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
