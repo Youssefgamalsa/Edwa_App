@@ -1,6 +1,6 @@
 // import React from "react";
 import img from "../../../src/assets/img/image.jpg";
-import { Carousel } from "react-bootstrap";
+// import { Carousel } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
@@ -20,10 +20,12 @@ import TableRow from "@mui/material/TableRow";
 import PlaceIcon from "@mui/icons-material/Place";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Carousel } from "react-bootstrap";
 
 export default function CardFormat() {
   const { id } = useParams();
-  const [prop, setProp] = useState([]);
+  const [prop, setProp] = useState({});
+  const [images , setImages] = useState([]);
   const [token] = localStorage.getItem("token");
   const getproperty = async () => {
     try {
@@ -38,6 +40,8 @@ export default function CardFormat() {
 
       setProp(response.data.property);
       console.log(response.data.property);
+      console.log(response.data.property.images);
+      setImages(response.data.property.images)
     } catch (error) {
       console.log(error);
     }
@@ -61,47 +65,57 @@ export default function CardFormat() {
         margin: "0 auto", // مركزي العنصر
       }}
     >
-      {prop.map((proper) => (
+      
         <>
-          <Box mb={4}>
-            <Carousel
-              data-bs-theme="white"
-              className="w-100"
-              interval={3000}
-              controls={true}
-              indicators={true}
-            >
-              {proper.images.map((imag, index) => (
-                <Carousel.Item key={index}>
-                  <img
-                    className="d-block w-100"
-                    src={imag.url}
-                    alt={`Slide ${index + 1}`}
-                    style={{
-                      height: "auto", // جعل الارتفاع تلقائي
-                      maxHeight: "400px", // تحديد الحد الأقصى للارتفاع
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
-                  />
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </Box>
+
+
+
+
+        <Box mb={4}>
+          <Carousel
+            data-bs-theme="white"
+            className="w-100"
+            interval={3000}
+            controls={true}
+            indicators={true}
+          >
+            {images.map((imag, index) => (
+              <Carousel.Item key={index}>
+                <img
+                  className="d-block w-100"
+                  src={imag.url}
+                  alt={`Slide ${index + 1}`}
+                  style={{
+                    height: "300px", // جعل الارتفاع تلقائي
+                    // maxHeight: "400px", // تحديد الحد الأقصى للارتفاع
+                    objectFit: "cover",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </Box>
+
+
+
+
+
+
           <Box>
             <Box className="title">
               <Typography variant="p" sx={{ ml: "10px" }}>
-                {proper.status == "rent" ? "للايجار" : "للبيع "}
+                {prop.status == "rent" ? "للايجار" : "للبيع "}
               </Typography>
               <Typography variant="p">9 اكتوبر</Typography>
               <Typography variant="h4" sx={{ my: "10px" }}>
-                {proper.title}
+                {prop.title}
               </Typography>
               <Typography variant="h5" sx={{ mb: "10px" }}>
-                <PlaceIcon /> {proper.location}
+                <PlaceIcon /> {prop.location}
               </Typography>
               <Typography variant="p" sx={{ mt: "20px" }} fontWeight={"700"}>
-                {proper.price} جنيه
+                {prop.price} جنيه
               </Typography>
             </Box>
           </Box>
@@ -122,10 +136,10 @@ export default function CardFormat() {
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell align="right">{proper.location}</TableCell>
-                      <TableCell align="right">{proper.area} م²</TableCell>
-                      <TableCell align="right">3</TableCell>
-                      <TableCell align="right">2</TableCell>
+                      <TableCell align="right">{prop.location}</TableCell>
+                      <TableCell align="right">{prop.area} م²</TableCell>
+                      <TableCell align="right">{prop.bedrooms}</TableCell>
+                      <TableCell align="right">{prop.bathrooms}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -142,7 +156,7 @@ export default function CardFormat() {
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell align="right">{proper.description}</TableCell>
+                      <TableCell align="right">{prop.description}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -174,10 +188,10 @@ export default function CardFormat() {
                     </Grid>
                     <Grid item md={8}>
                       <Typography variant="h6">
-                        {proper.owner.firstName} {proper.owner.lastName}
+                        {prop?.owner?.firstName} {prop?.owner?.lastName}
                       </Typography>
                       <Typography variant="body2">
-                        تاريخ النشر: {proper.listedDate}
+                        تاريخ النشر: {prop.listedDate}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -210,7 +224,6 @@ export default function CardFormat() {
             </Grid>
           </Grid>
         </>
-      ))}
     </div>
   );
 }

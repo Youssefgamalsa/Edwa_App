@@ -12,6 +12,9 @@ import {
   TableCell,
   Box,
 } from "@mui/material";
+// import Typography from '@mui/material/Typography';
+import Pagination from "@mui/material/Pagination";
+// import Stack from "@mui/material/Stack";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import img from "../../../../assets/img/image.jpg"; // يمكنك استخدام الصورة الخاصة بك هنا
 import { useNavigate } from "react-router-dom";
@@ -25,19 +28,23 @@ export default function CardComponent() {
 
   let { register, handleSubmit } = useForm();
   const [all_property, setAll_property] = useState([]);
-
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+    console.log(value);
+  };
   const nav = useNavigate();
 
-  const get_all_properity = async (price, status) => {
+  const get_all_properity = async () => {
     try {
       let response = await axios.get(
         "https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property",
-        {
-          params: {
-            "price[gt]": price,
-            "status": status,
-          },
-        }
+        // {
+        //   params: {
+        //     "price[gt]": price,
+        //     status: status,
+        //   },
+        // }
       );
       console.log(response);
       console.log(response.data.property);
@@ -48,7 +55,7 @@ export default function CardComponent() {
   };
 
   useEffect(() => {
-    get_all_properity(300000, "sell");
+    get_all_properity();
   }, []);
 
   const handleSearch = (data) => {
@@ -154,10 +161,10 @@ export default function CardComponent() {
                 </IconButton>
                 <Button
                   variant="contained"
-                  color={prop.status == "sell" ? "success" : "danger"}
+                  color={prop.status == "sell" ? "success" : "error"}
                   sx={{ position: "absolute", top: 10, right: 10 }}
                 >
-                  {prop.status == "sell" ? "للبيع " : "للايجار "} 
+                  {prop.status == "sell" ? "للبيع " : "للايجار "}
                 </Button>
                 <CardContent>
                   <Typography
@@ -256,6 +263,18 @@ export default function CardComponent() {
           </>
         ))}
       </Grid>
+      <div
+        style={{
+          width: "85%",
+          margin: "auto",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        className="my-3"
+      >
+        <Pagination count={10} page={page} onChange={handleChange} />
+      </div>
     </>
   );
 }

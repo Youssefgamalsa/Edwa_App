@@ -18,9 +18,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 
 const pages = [
-  { name: "اضافة شقة", link: "/showdata" },
-  { name: "اضافة ارض", link: "/add-land" },
-  { name: "اضافة مبني سكني", link: "/add-building" },
+  { name: "اضافة شقة", link: "/showdata" }
 ];
 
 const settings = [

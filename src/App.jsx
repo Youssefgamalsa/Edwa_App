@@ -13,9 +13,8 @@ import ForgetPassword from "./Modules/Auth/Components/ForgetPassword/ForgetPassw
 import ChangePassword from "./Modules/Auth/Components/ChangePassword/ChangePasowrd";
 import Verify from "./Modules/Auth/Components/Verify/Verify";
 import ShowAqar from "./Modules/ShowAqar/ShowAqar";
-import AddBuilding from "./Modules/AddBuilding/AddBuilding";
-import Profile from "./Modules/Profile/Components/Profile"
-import AddLand from "./Modules/AddLand/AddLandin";
+import Profile from "./Modules/Profile/Components/Profile" ;
+
 function App() {
   const routes = createBrowserRouter([
     {
@@ -26,8 +25,6 @@ function App() {
         {index:true,element:<Home/>},
         {path:"card",element:<CardFormat/>},
         {path:"showdata",element:<ShowAqar/>},
-        {path:"add-building",element:<AddBuilding/>},
-        {path:"add-land",element:<AddLand/>},
         {path:"profile",element:<Profile/>},
         {path:":id",element:<CardFormat/>},
       ],
