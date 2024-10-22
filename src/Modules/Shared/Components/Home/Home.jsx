@@ -17,22 +17,25 @@ import img from "../../../../assets/img/image.jpg"; // يمكنك استخدام
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {Carousel } from 'react-bootstrap'
+import { Carousel } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 
 export default function CardComponent() {
   // nav
+
+  let { register, handleSubmit } = useForm();
   const [all_property, setAll_property] = useState([]);
 
   const nav = useNavigate();
 
-  const get_all_properity = async () => {
+  const get_all_properity = async (price, status) => {
     try {
       let response = await axios.get(
         "https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property",
         {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InlqMDgyMDk5NkBnbWFpbC5jb20iLCJ1c2VyTmFtZSI6IllvdXNzZWYgZ2FtYWwiLCJwaG9uZSI6IjAxMTI1NjgzMjY1Iiwicm9sZSI6InNlbGxlciIsImlkIjoiNjcxMWU5MTFkODkwN2RlY2U0ZmRjNjMzIiwiaWF0IjoxNzI5MjI3MTIzfQ.cj3QEay_mAMlB0XJqTFpkjQpoHdukBiuyqO-zu9QvJY",
+          params: {
+            "price[gt]": price,
+            "status": status,
           },
         }
       );
@@ -45,62 +48,66 @@ export default function CardComponent() {
   };
 
   useEffect(() => {
-    get_all_properity();
+    get_all_properity(300000, "sell");
   }, []);
+
+  const handleSearch = (data) => {
+    get_all_properity(data.price, data.status);
+  };
 
   return (
     <>
-    <Box mb={4}>
-    <Carousel
-      data-bs-theme="white"
-      className="w-100"
-      interval={3000}
-      controls={true}
-      indicators={true}
-    >
-      {[...Array(3)].map((_, index) => (
-        <Carousel.Item key={index}>
-          <img
-            className="d-block w-100"
-            src={img}
-            alt={`Slide ${index + 1}`}
-            style={{
-              height: "auto", // جعل الارتفاع تلقائي
-              maxHeight: "400px", // تحديد الحد الأقصى للارتفاع
-              objectFit: "cover",
-              borderRadius: "10px",
-            }}
+      <Box mb={4}>
+        <Carousel
+          data-bs-theme="white"
+          className="w-100"
+          interval={3000}
+          controls={true}
+          indicators={true}
+        >
+          {[...Array(3)].map((_, index) => (
+            <Carousel.Item key={index}>
+              <img
+                className="d-block w-100"
+                src={img}
+                alt={`Slide ${index + 1}`}
+                style={{
+                  height: "auto", // جعل الارتفاع تلقائي
+                  maxHeight: "400px", // تحديد الحد الأقصى للارتفاع
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                }}
+              />
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </Box>
+      <form onSubmit={handleSubmit(handleSearch)}>
+        <div className="search_bar shadow-lg  d-flex flex-column flex-md-row">
+          <input
+            type="number"
+            className="w-100 w-md-20 text-md-left p-2"
+            placeholder="السعر يبدا من "
+            {...register("price")}
           />
-        </Carousel.Item>
-      ))}
-    </Carousel>
-  </Box>
-      <div className="search_bar shadow-lg  d-flex flex-column flex-md-row">
-        <select
-          className="form-select w-100 w-md-20 text-center text-md-left"
-          style={{ width: "20%", margin: "auto" }}
-        >
-          <option selected> نوع العقار </option>
-          <option value="1">شقه </option>
-          <option value="2"> مبنى سكنى </option>
-          <option value="3">اراضى </option>
-        </select>
-        <select
-          className="form-select  w-100 w-md-20 text-center text-md-left"
-          style={{ width: "20%", margin: "auto" }}
-        >
-          <option selected>نوع العقد </option>
-          <option value="1"> ايجار </option>
-          <option value="2"> للبيع </option>
-        </select>
-        <button
-          type="submit "
-          className=" btn btn-outline-danger w-100 w-md-20"
-          style={{ width: "20%", margin: "auto" }}
-        >
-          بحث 
-        </button>
-      </div>
+          <select
+            className="form-select  w-100 w-md-20 text-center text-md-left"
+            style={{ width: "20%", margin: "auto" }}
+            {...register("status")}
+          >
+            <option selected>نوع العقد </option>
+            <option value="rent"> ايجار </option>
+            <option value="sell"> للبيع </option>
+          </select>
+          <button
+            type="submit"
+            className=" btn btn-outline-danger w-100 w-md-20"
+            style={{ width: "20%", margin: "auto" }}
+          >
+            بحث
+          </button>
+        </div>
+      </form>
 
       <h2
         className="text-center text-primary mb-3 "
@@ -147,10 +154,10 @@ export default function CardComponent() {
                 </IconButton>
                 <Button
                   variant="contained"
-                  color="success"
+                  color={prop.status == "sell" ? "success" : "danger"}
                   sx={{ position: "absolute", top: 10, right: 10 }}
                 >
-                  للايجار
+                  {prop.status == "sell" ? "للبيع " : "للايجار "} 
                 </Button>
                 <CardContent>
                   <Typography

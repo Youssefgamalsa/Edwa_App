@@ -94,8 +94,8 @@ export default function ShowAqar() {
             type="text"
             fullWidth
             variant="outlined"
-            placeholder="base title "
-            {...register("title", { required: "السعر مطلوب" })}
+            placeholder="title"
+            {...register("title", { required: "العنوان مطلوب" })}
             error={!!errors.title}
             helperText={errors.title ? errors.title.message : ""}
             sx={{ bgcolor: "#f0f4ff" }}
