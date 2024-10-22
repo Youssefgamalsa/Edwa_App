@@ -67,10 +67,6 @@ export default function CardFormat() {
     >
       
         <>
-
-
-
-
         <Box mb={4}>
           <Carousel
             data-bs-theme="white"
