@@ -47,7 +47,7 @@ export default function ShowAqar() {
         form_data,
         {
           headers: {
-            Authorization: `${token}`,
+            token: `${token}`,
           },
         }
       );
