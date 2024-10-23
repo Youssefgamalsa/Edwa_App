@@ -11,14 +11,54 @@ import {
   Box,
 } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import Swal from "sweetalert2";
+// import { Delete, Edit } from "@mui/icons-material";
 
 export default function Profile() {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
   const { id } = useParams();
+  const token = localStorage.getItem("token");
 
+  const userTrue = useContext(AuthContext);
+  const userid = userTrue?.userData?.id;
+  console.log(userTrue);
+
+  const fire = (id) => {
+    return Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await delete_Prop(id);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  };
+
+  const delete_Prop = async (id) => {
+    let response = await axios.delete(
+      `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property/${id}`,
+      {
+        headers: {
+          token: token,
+        },
+      }
+    );
+    console.log(response);
+  };
   const getUser = async () => {
     try {
       let response = await axios.get(
@@ -34,12 +74,9 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [id]);
   return (
     <Box sx={{ flexGrow: 1, p: 3, direction: "rtl" }}>
-      {" "}
-      {/* تم إضافة direction: 'rtl' لدعم الاتجاه من اليمين إلى اليسار */}
-      {/* Profile Header */}
       <Grid
         container
         spacing={3}
@@ -67,19 +104,19 @@ export default function Profile() {
           <>
             <Grid item xs={12} md={6}>
               <Card
-                sx={{ position: "relative", height: "100%" }}
-                onClick={() => navigate(`/${post._id}`)}
+                sx={{ position: "relative", height: "100%", cursor: "pointer" }}
               >
                 <CardMedia
                   component="img"
                   image={post.images[0].url}
                   alt="Card image cap"
+                  onClick={() => navigate(`/${post._id}`)}
                   sx={{
                     height: { xs: 200, md: 250 }, // لضبط الارتفاع حسب الشاشة
                     objectFit: "cover", // لجعل الصورة تظهر بالكامل مع الحفاظ على النسبة
                   }}
                 />
-                <CardContent>
+                <CardContent onClick={() => navigate(`/${post._id}`)}>
                   <Typography variant="h5" component="div">
                     {post.title}
                   </Typography>
@@ -110,10 +147,39 @@ export default function Profile() {
                       </tr>
                     </tbody>
                   </table>
+                </CardContent>
+                <Box
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    margin: "10px 0px",
+                    padding: "15px",
+                  }}
+                >
                   <Typography variant="h6" mt={2}>
                     {post.price} جنيه
                   </Typography>
-                </CardContent>
+                  {userid == id ? (
+                    <Box
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button className="btn btn-primary mx-2">Edit</Button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => fire(post._id)}
+                      >
+                        Delete
+                      </button>
+                    </Box>
+                  ) : (
+                    ""
+                  )}
+                </Box>
               </Card>
             </Grid>
           </>

@@ -1,5 +1,5 @@
 // import React from "react";
-import img from "../../../src/assets/img/image.jpg";
+import img from "../../../src/assets/img/user-placeholder.png";
 // import { Carousel } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
@@ -41,8 +41,8 @@ export default function CardFormat() {
 
       setProp(response.data.property);
       console.log(response.data.property);
-      setUserid(response.data.property.ownerId._id);
-      console.log(response.data.property.ownerId)
+      setUserid(response.data.property.ownerId?._id);
+      console.log(response.data.property?.ownerId);
       console.log(response.data.property.images);
       setImages(response.data.property.images);
     } catch (error) {
@@ -84,8 +84,7 @@ export default function CardFormat() {
                   src={imag.url}
                   alt={`Slide ${index + 1}`}
                   style={{
-                    height: "300px", // جعل الارتفاع تلقائي
-                    // maxHeight: "400px", // تحديد الحد الأقصى للارتفاع
+                    height: "300px",
                     objectFit: "cover",
                     borderRadius: "10px",
                   }}
@@ -153,6 +152,12 @@ export default function CardFormat() {
                   </TableRow>
                 </TableBody>
               </Table>
+
+              <button className="btn btn-outline-danger my-3 mx-3">
+                {prop.available == true
+                  ? "لا يزال العقار متاحا "
+                  : "العقار غير متاح "}
+              </button>
             </Paper>
           </Grid>
           <Grid item lg={6} md={12} sm={12}>
@@ -203,12 +208,16 @@ export default function CardFormat() {
                   >
                     تواصل مع واتساب <WhatsApp />
                   </Button>
-                  <Link
-                    className="btn btn-outline-dark w-100"
-                    onClick={() => nav(`/profile/${userid}`)}
-                  >
-                    جميع اعلانات صاحب العقار
-                  </Link>
+                  {prop.ownerId ? (
+                    <Link
+                      className="btn btn-outline-dark w-100"
+                      onClick={() => nav(`/profile/${userid}`)}
+                    >
+                      جميع اعلانات صاحب العقار
+                    </Link>
+                  ) : (
+                    ""
+                  )}
                 </Box>
               </CardContent>
             </Card>

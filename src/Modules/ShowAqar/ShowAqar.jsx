@@ -23,6 +23,21 @@ export default function ShowAqar() {
     }
   }, [token, nav]);
 
+  // const append_to_form_data = (data) => {
+  //   let formData = new FormData();
+  //   formData.append("title", data.title);
+  //   formData.append("location", data.location);
+  //   formData.append("price", data.price);
+  //   formData.append("area", data.area);
+  //   formData.append("bedrooms", data.bedrooms);
+  //   formData.append("bathrooms", data.bathrooms);
+  //   formData.append("type", "partment");
+  //   formData.append("images", data.images);
+  //   formData.append("status", data.status);
+  // };
+
+  // إرسال البيانات إلى الخادم
+
   const append_to_form_data = (data) => {
     let formData = new FormData();
     formData.append("title", data.title);
@@ -32,11 +47,14 @@ export default function ShowAqar() {
     formData.append("bedrooms", data.bedrooms);
     formData.append("bathrooms", data.bathrooms);
     formData.append("type", "partment");
-    formData.append("images", data.images);
-    formData.append("status", data.status);
+    formData.append("status", data.status); // تأكد من إضافة status
+    formData.append("description", data.description); // تأكد من إضافة description
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append("images", data.images[i]); // تأكد من إضافة الصور كـ FormData
+    }
+    return formData; // تأكد من إرجاع formData
   };
 
-  // إرسال البيانات إلى الخادم
   const submit = async (data) => {
     console.log(data);
     const form_data = append_to_form_data(data);
@@ -47,14 +65,17 @@ export default function ShowAqar() {
         form_data,
         {
           headers: {
-            token: `${token}`,
+            token: token,
           },
         }
       );
+      console.log(token);
+      nav("/");
       console.log("Response:", response);
       toast.success("Real State Created Successfully ");
     } catch (error) {
       console.error("Error:", error);
+      toast.error("failed Created");
     }
   };
 
@@ -79,13 +100,16 @@ export default function ShowAqar() {
         onSubmit={handleSubmit(submit)}
       >
         <select
-          className="form-select  w-100 text-md-left text-center"
-          style={{ marginBottom: "30px" }}
-          {...register("status", { required: "نوع العقد مطلوب " })}
+          className="form-select w-100 w-md-20 text-center text-md-left"
+          style={{ width: "20%", margin: "20px auto" }}
+          {...register("status")}
+          defaultValue="" // استخدام defaultValue لتحديد القيمة الافتراضية
         >
-          <option selected>نوع العقد </option>
-          <option value="rent"> ايجار </option>
-          <option value="sell"> للبيع </option>
+          <option value="" disabled>
+            نوع العقد
+          </option>
+          <option value="rent">ايجار</option>
+          <option value="sell">للبيع</option>
         </select>
         <Box mb={3}>
           <TextField
@@ -95,7 +119,7 @@ export default function ShowAqar() {
             fullWidth
             variant="outlined"
             placeholder="title"
-            {...register("title", { required: "العنوان مطلوب" })}
+            {...register("title", { required: "Title is Required " })}
             error={!!errors.title}
             helperText={errors.title ? errors.title.message : ""}
             sx={{ bgcolor: "#f0f4ff" }}
@@ -133,11 +157,11 @@ export default function ShowAqar() {
         <Box mb={3}>
           <TextField
             id="address"
-            label="العنوان بالتفصيل"
+            label="المدينه "
             fullWidth
             variant="outlined"
-            placeholder="العنوان بالتفصيل"
-            {...register("location", { required: "العنوان مطلوب" })}
+            placeholder="المدينه "
+            {...register("location", { required: "المدينه " })}
             error={!!errors.location}
             helperText={errors.location ? errors.location.message : ""}
             sx={{ bgcolor: "#f0f4ff" }}
@@ -178,7 +202,7 @@ export default function ShowAqar() {
             rows={5}
             fullWidth
             variant="outlined"
-            placeholder="وصف قطعة الأرض"
+            placeholder="وصف شامل للعقار "
             {...register("description", { required: "الوصف مطلوب" })}
             error={!!errors.description}
             helperText={errors.description ? errors.description.message : ""}

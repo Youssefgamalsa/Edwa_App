@@ -1,15 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import 'bootstrap/dist/js/bootstrap.min.js'
-import 'react-toastify/dist/ReactToastify.css';
+import "bootstrap/dist/js/bootstrap.min.js";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContextProvider } from "./context/AuthContext.jsx";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
+  </StrictMode>
+);

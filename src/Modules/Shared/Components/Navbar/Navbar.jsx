@@ -16,19 +16,25 @@ import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import { useEffect, useContext } from "react";
+import { AuthContext } from "../../../../context/AuthContext";
 
-const pages = [
-  { name: "اضافة شقة", link: "/showdata" }
-];
-
-const settings = [
-  { name: "Profile", link: "/profile" },
-  { name: "Logout", link: "auth/logout" },
-];
+const pages = [{ name: "اعرض عقارك ", link: "/showdata" }];
 
 function Navbar() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const user = useContext(AuthContext);
+  const [userid, setUserid] = React.useState();
+  // نقل useContext خارج useEffect
+  const settings = [
+    { name: "My Profile", link: `/profile/${userid}` },
+    { name: "Logout", link: "auth/logout" },
+  ];
+  useEffect(() => {
+    console.log(user);
+    setUserid(user?.userData?.id);
+  }, [user]);
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
