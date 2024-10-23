@@ -14,9 +14,11 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import Swal from "sweetalert2";
+import LoadingPage from "../../../LoadingPage/LoadingPage";
 // import { Delete, Edit } from "@mui/icons-material";
 
 export default function Profile() {
+  const [load, setLoad] = useState(true);
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
@@ -60,6 +62,7 @@ export default function Profile() {
     console.log(response);
   };
   const getUser = async () => {
+    setLoad(true);
     try {
       let response = await axios.get(
         `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/user/${id}`
@@ -69,6 +72,8 @@ export default function Profile() {
       setUser(response.data.user);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoad(false);
     }
   };
 
@@ -99,92 +104,101 @@ export default function Profile() {
           </Button>
         </Grid>
       </Grid>
-      <Grid container spacing={3}>
-        {posts.map((post) => (
-          <>
-            <Grid item xs={12} md={6}>
-              <Card
-                sx={{ position: "relative", height: "100%", cursor: "pointer" }}
-              >
-                <CardMedia
-                  component="img"
-                  image={post.images[0].url}
-                  alt="Card image cap"
-                  onClick={() => navigate(`/${post._id}`)}
+      {load ? (
+        <LoadingPage />
+      ) : (
+        <Grid container spacing={3}>
+          {posts.map((post) => (
+            <>
+              <Grid item xs={12} md={6}>
+                <Card
                   sx={{
-                    height: { xs: 200, md: 250 }, // لضبط الارتفاع حسب الشاشة
-                    objectFit: "cover", // لجعل الصورة تظهر بالكامل مع الحفاظ على النسبة
-                  }}
-                />
-                <CardContent onClick={() => navigate(`/${post._id}`)}>
-                  <Typography variant="h5" component="div">
-                    {post.title}
-                  </Typography>
-                  <table style={{ width: "100%", marginTop: "16px" }}>
-                    <tbody>
-                      <tr>
-                        <td>عدد الحمامات</td>
-                        <td>عدد الغرف</td>
-                        <td>المساحه</td>
-                        <td>الموقع</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          {post.bathrooms}{" "}
-                          <i className="fa-solid fa-city mx-2"></i>
-                        </td>
-                        <td>
-                          {post.bedrooms}{" "}
-                          <i className="fa-solid fa-bed mx-2"></i>
-                        </td>
-                        <td>
-                          {post.area} <i className="fa-solid fa-house mx-2"></i>
-                        </td>
-                        <td>
-                          {post.location}{" "}
-                          <i className="fa-solid fa-location-dot mx-2"></i>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </CardContent>
-                <Box
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    margin: "10px 0px",
-                    padding: "15px",
+                    position: "relative",
+                    height: "100%",
+                    cursor: "pointer",
                   }}
                 >
-                  <Typography variant="h6" mt={2}>
-                    {post.price} جنيه
-                  </Typography>
-                  {userid == id ? (
-                    <Box
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Button className="btn btn-primary mx-2">Edit</Button>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => fire(post._id)}
+                  <CardMedia
+                    component="img"
+                    image={post.images[0].url}
+                    alt="Card image cap"
+                    onClick={() => navigate(`/${post._id}`)}
+                    sx={{
+                      height: { xs: 200, md: 250 }, // لضبط الارتفاع حسب الشاشة
+                      objectFit: "cover", // لجعل الصورة تظهر بالكامل مع الحفاظ على النسبة
+                    }}
+                  />
+                  <CardContent onClick={() => navigate(`/${post._id}`)}>
+                    <Typography variant="h5" component="div">
+                      {post.title}
+                    </Typography>
+                    <table style={{ width: "100%", marginTop: "16px" }}>
+                      <tbody>
+                        <tr>
+                          <td>عدد الحمامات</td>
+                          <td>عدد الغرف</td>
+                          <td>المساحه</td>
+                          <td>الموقع</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            {post.bathrooms}{" "}
+                            <i className="fa-solid fa-city mx-2"></i>
+                          </td>
+                          <td>
+                            {post.bedrooms}{" "}
+                            <i className="fa-solid fa-bed mx-2"></i>
+                          </td>
+                          <td>
+                            {post.area}{" "}
+                            <i className="fa-solid fa-house mx-2"></i>
+                          </td>
+                          <td>
+                            {post.location}{" "}
+                            <i className="fa-solid fa-location-dot mx-2"></i>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </CardContent>
+                  <Box
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      margin: "10px 0px",
+                      padding: "15px",
+                    }}
+                  >
+                    <Typography variant="h6" mt={2}>
+                      {post.price} جنيه
+                    </Typography>
+                    {userid == id ? (
+                      <Box
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
                       >
-                        Delete
-                      </button>
-                    </Box>
-                  ) : (
-                    ""
-                  )}
-                </Box>
-              </Card>
-            </Grid>
-          </>
-        ))}
-      </Grid>
+                        <Button className="btn btn-primary mx-2">Edit</Button>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => fire(post._id)}
+                        >
+                          Delete
+                        </button>
+                      </Box>
+                    ) : (
+                      ""
+                    )}
+                  </Box>
+                </Card>
+              </Grid>
+            </>
+          ))}
+        </Grid>
+      )}
     </Box>
   );
 }

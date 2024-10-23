@@ -212,7 +212,7 @@ export default function ShowAqar() {
         {/* رفع الصورة */}
         <Box mb={4} sx={{ position: "relative" }}>
           <Typography variant="h6" color="error" mb={2}>
-            إضافة صورة رئيسية للعقار
+            إضافة صور رئيسية للعقار
           </Typography>
           <Box
             sx={{
@@ -226,11 +226,12 @@ export default function ShowAqar() {
             }}
           >
             <Typography variant="h5" color="primary">
-              رفع صورة
+              رفع صور العقار
             </Typography>
             <input
               type="file"
-              {...register("images", { required: "الصورة مطلوبة" })}
+              multiple
+              {...register("images", { required: "الصور مطلوبة" })}
               style={{
                 opacity: 0,
                 position: "absolute",

@@ -18,8 +18,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { useEffect, useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
+import logo from "../../../../assets/img/logon.png";
 
-const pages = [{ name: "اعرض عقارك ", link: "/showdata" }];
+const pages = [
+  { name: "اعرض عقارك", link: "/showdata" },
+  { name: "تسجيل الدخول  ", link: "/auth/login" },
+];
 
 function Navbar() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -90,7 +94,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            عقارات
+            <img src={logo} alt="" width={"100px"} />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -122,7 +126,8 @@ function Navbar() {
                       onClick={toggleDrawer(false)}
                     >
                       <Typography
-                        sx={{ textAlign: "right", padding: 2, color: "#000" }}
+                        sx={{ textAlign: "right", padding: 2, color: "#000" , marginLeft:"5px"}}
+                      
                       >
                         {page.name}
                       </Typography>
@@ -167,7 +172,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            عقارات
+            <img src={logo} alt="" width={"100px"} />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -183,7 +188,9 @@ function Navbar() {
                   padding: "10px",
                   color: "#000",
                 }}
+                  className="btn btn-outline-danger"
               >
+              
                 {page.name}
               </Button>
             ))}

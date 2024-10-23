@@ -5,7 +5,7 @@ import AuthComponent from "../../../Usable/Component/AuthComponent/AuthComponent
 import axios from "axios";
 // import { USERS_URL } from "../../../../Api/Api";
 import { toast } from "react-toastify";
-import { GoogleLogin } from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -33,23 +33,6 @@ export default function Login() {
       console.log(error);
     }
   };
-
-  // const handleLoginSuccess = async (credentialResponse) => {
-  //   const token = credentialResponse.credential;
-  //   try {
-  //     const res = await axios.post(USERS_URL.login, { token });
-  //     toast.success("Sign in Successfully");
-  //     console.log(res);
-  //   } catch (error) {
-  //     toast.error("Sign in Failed. Please try again.");
-  //     console.log(error);
-  //   }
-  // };
-
-  // const handleLoginFailure = (error) => {
-  //   toast.error("Login Failed: " + error);
-  // };
-
   const form = () => {
     return (
       <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
@@ -58,16 +41,7 @@ export default function Login() {
             <div className="text-center mb-4">
               <h4 className="text-center text-md-start">Sign in</h4>
             </div>
-            <div className="d-flex gap-3 flex-column">
-              <GoogleLogin
-                // onSuccess={handleLoginSuccess}
-                // onFailure={handleLoginFailure}
-                style={{ display: "inline-block" }}
-              />
-              <span className="ms-2 fs-6">Log in with Google</span>
-            </div>
-            <p className="text-center mt-4 mb-5">Or sign in with</p>
-
+            <p className="text-center mt-4 mb-5">sign in with</p>
             {/* Login Form */}
             <form onSubmit={handleSubmit(submit)}>
               <div className="row gy-3 overflow-hidden">

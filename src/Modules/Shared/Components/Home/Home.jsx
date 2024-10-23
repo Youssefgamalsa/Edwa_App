@@ -19,12 +19,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Carousel } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 import Nodata from "../Nodata/Nodata";
 import LoadingPage from "../../../../LoadingPage/LoadingPage";
 
 export default function CardComponent() {
-  const { register, handleSubmit } = useForm();
   const [all_property, setAll_property] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
@@ -60,9 +58,6 @@ export default function CardComponent() {
     get_all_properity(value);
   };
 
-  const handleSearch = () => {
-    get_all_properity(1);
-  };
 
   return (
     <>
@@ -85,41 +80,6 @@ export default function CardComponent() {
           ))}
         </Carousel>
       </Box>
-
-      <form onSubmit={handleSubmit(handleSearch)}>
-        <div className="search_bar shadow-lg d-flex flex-column flex-md-row">
-          <input
-            type="number"
-            className="w-100 w-md-20 text-md-left p-2"
-            placeholder="السعر يبدا من"
-            {...register("price")}
-            style={{
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-              margin: "0.5rem 0",
-            }}
-          />
-          <select
-            className="form-select w-100 w-md-20 text-center text-md-left"
-            style={{ width: "20%", margin: "0.5rem auto" }}
-            defaultValue=""
-            {...register("status")}
-          >
-            <option value="" disabled>
-              نوع العقد
-            </option>
-            <option value="rent">ايجار</option>
-            <option value="sell">للبيع</option>
-          </select>
-          <button
-            type="submit"
-            className="btn btn-outline-danger w-100 w-md-20"
-            style={{ width: "20%", margin: "0.5rem auto", borderRadius: "5px" }}
-          >
-            بحث
-          </button>
-        </div>
-      </form>
 
       <h2
         className="text-center text-primary mb-3"

@@ -96,17 +96,27 @@ export default function CardFormat() {
 
         <Box>
           <Box className="title">
-            <Typography variant="p" sx={{ ml: "10px" }}>
+            <Typography
+              variant="p"
+              sx={{ ml: "10px" }}
+              className={
+                prop.status == "rent" ? "btn btn-danger " : "btn btn-success"
+              }
+            >
               {prop.status == "rent" ? "للايجار" : "للبيع "}
             </Typography>
-            <Typography variant="p">9 اكتوبر</Typography>
             <Typography variant="h4" sx={{ my: "10px" }}>
               {prop.title}
             </Typography>
             <Typography variant="h5" sx={{ mb: "10px" }}>
               <PlaceIcon /> {prop.location}
             </Typography>
-            <Typography variant="p" sx={{ mt: "20px" }} fontWeight={"700"}>
+            <Typography
+              variant="h4"
+              sx={{ mt: "20px" }}
+              fontWeight={"700"}
+              color="primary"
+            >
               {prop.price} جنيه
             </Typography>
           </Box>
@@ -201,13 +211,12 @@ export default function CardFormat() {
                   >
                     01125683265 <Phone />
                   </Button>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    className="w-100 mb-3"
+                  <a
+                    className="w-100 mb-3 btn btn-success"
+                    href={`https://wa.me/1125683265/?text=اريد ان اعرف معلومات اكثر عن العقار `}
                   >
                     تواصل مع واتساب <WhatsApp />
-                  </Button>
+                  </a>
                   {prop.ownerId ? (
                     <Link
                       className="btn btn-outline-dark w-100"
