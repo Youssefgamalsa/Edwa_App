@@ -27,6 +27,8 @@ export default function Profile() {
 
   const userTrue = useContext(AuthContext);
   const userid = userTrue?.userData?.id;
+  const role = userTrue.userData.role;
+  const tree = role == "admin" || userid == id;
   console.log(userTrue);
 
   const fire = (id) => {
@@ -60,6 +62,7 @@ export default function Profile() {
       }
     );
     console.log(response);
+    getUser()
   };
   const getUser = async () => {
     setLoad(true);
@@ -173,7 +176,7 @@ export default function Profile() {
                     <Typography variant="h6" mt={2}>
                       {post.price} جنيه
                     </Typography>
-                    {userid == id ? (
+                    {tree ? (
                       <Box
                         style={{
                           display: "flex",

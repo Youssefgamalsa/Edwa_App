@@ -206,11 +206,11 @@ export default function CardComponent() {
                       variant="h5"
                       sx={{
                         textAlign: "right",
-                        color: "primary",
                         marginTop: 2,
                         fontSize: { xs: "1.25rem", sm: "1.5rem" },
                         fontFamily: "'Roboto', sans-serif",
                       }}
+                      className="text-primary"
                     >
                       {`${prop.price} جنيه`}
                     </Typography>
