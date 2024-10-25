@@ -1,5 +1,6 @@
 // import React from 'react';
-import logo from '../../../../assets/img/logon.png'
+import { useNavigate } from "react-router-dom";
+import logo from "../../../../assets/img/logon.png";
 import {
   MDBFooter,
   MDBContainer,
@@ -9,17 +10,17 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function Footer() {
+  const nav = useNavigate();
   return (
     <MDBFooter bgColor="light" className="text-center text-lg-start text-muted">
-      <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <div className="me-5 d-none d-lg-block">
-          <span>Get connected with us on social networks:</span>
-        </div>
-
-        <div>
-          <button className="btn btn-primary"> اعلن عن عقارك مجانا </button>
-        </div>
-      </section>
+      <div className="text-center">
+        <button
+          className="btn btn-primary mb-3"
+          onClick={() => nav("/showdata")}
+        >
+          اعلن عن عقارك مجانا{" "}
+        </button>
+      </div>
 
       <section className="">
         <MDBContainer className="text-center text-md-start mt-5">
@@ -27,7 +28,7 @@ export default function Footer() {
             <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
                 <MDBIcon icon="gem" className="me-3" />
-                <img src={logo} width={'180px'}/>
+                <img src={logo} width={"180px"} />
               </h6>
               <p>
                 Here you can display your property securely and for free so that
@@ -62,9 +63,8 @@ export default function Footer() {
         className="text-center p-4"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
       >
-        © 2021 Copyright:
-        <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-          MDBootstrap.com
+        <a className="" href="/">
+          <img src={logo} width={"180px"} />
         </a>
       </div>
     </MDBFooter>

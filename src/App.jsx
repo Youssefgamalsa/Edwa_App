@@ -23,7 +23,6 @@ function App() {
       errorElement: <NotFound />,
       children: [
         {index:true,element:<Home/>},
-        {path:"card",element:<CardFormat/>},
         {path:"showdata",element:<ShowAqar/>},
         {path:"profile/:id",element:<Profile/>},
         {path:":id",element:<CardFormat/>},
