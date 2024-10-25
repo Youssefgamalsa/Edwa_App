@@ -184,7 +184,6 @@ export default function Profile() {
                           alignItems: "center",
                         }}
                       >
-                        <Button className="btn btn-primary mx-2">Edit</Button>
                         <button
                           className="btn btn-danger"
                           onClick={() => fire(post._id)}
