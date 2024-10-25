@@ -110,10 +110,10 @@ export default function Profile() {
       {load ? (
         <LoadingPage />
       ) : (
-        <Grid container spacing={3}>
+        <Grid spacing={3}>
           {posts.map((post) => (
             <>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={8} sm={12}>
                 <Card
                   sx={{
                     position: "relative",

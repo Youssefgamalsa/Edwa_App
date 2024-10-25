@@ -20,7 +20,7 @@ export default function Verify() {
     try {
       const res = await axios.post(USERS_URL.verfiy, data);
       toast.success("verfiy successfully");
-      nav('/');
+      nav('/auth/login');
       console.log(res);
     } catch (error) {
       console.error(error);

@@ -21,7 +21,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import logo from "../../../../assets/img/logon.png";
 
 const pages = [
-  { name: "اعرض عقارك", link: "/showdata" },
+  { name: "اعلن عن عقارك مجانا ", link: "/showdata" },
   { name: "تسجيل الدخول  ", link: "/auth/login" },
 ];
 
