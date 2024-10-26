@@ -27,8 +27,7 @@ export default function Login() {
       toast.success("Sign in Successfully");
       nav('/');
     } catch (error) {
-      toast.error(
-        "Sign in Failed. Please check your credentials and try again."
+      toast.error(error.response.data.errorr
       );
       console.log(error);
     }
