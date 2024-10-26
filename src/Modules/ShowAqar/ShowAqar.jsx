@@ -91,7 +91,6 @@ export default function ShowAqar() {
           textAlign: "right",
           direction: "rtl",
           bgcolor: "#f9f9f9",
-          // padding: "20px",
           borderRadius: "8px",
         }}
       >
@@ -170,9 +169,9 @@ export default function ShowAqar() {
           <Box display="flex" justifyContent="space-between" mb={3}>
             <TextField
               id="bedrooms"
-              label="عدد الغرف الرءيسيه "
+              label=" عدد الغرف الرءيسيه اذا كان العقار ارض كتب 0 "
               variant="outlined"
-              placeholder=" عدد الغرف الرءيسيه  "
+              placeholder=" عدد الغرف الرءيسيه اذا كان العقار ارض كتب 0 "
               {...register("bedrooms", {
                 required: "عدد الغرف الرءيسيه مطلوبة  ",
               })}
@@ -184,9 +183,9 @@ export default function ShowAqar() {
           <Box display="flex" justifyContent="space-between" mb={3}>
             <TextField
               id="bathrooms"
-              label=" عدد الحمامات "
+              label=" عدد الحمامات اذا كان العقار ارض كتب 0"
               variant="outlined"
-              placeholder=" عدد الحمامات "
+              placeholder=" عدد الحمامات اذا كان العقار ارض كتب 0"
               {...register("bathrooms", { required: "عدد الحمامات مطلوبة" })}
               error={!!errors.bathrooms}
               helperText={errors.bathrooms ? errors.bathrooms.message : ""}
