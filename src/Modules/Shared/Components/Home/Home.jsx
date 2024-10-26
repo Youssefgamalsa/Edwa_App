@@ -5,7 +5,6 @@ import {
   CardContent,
   Typography,
   Button,
-  IconButton,
   Table,
   TableBody,
   TableRow,
@@ -13,7 +12,6 @@ import {
   Box,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import img from "../../../../assets/img/image.jpg"; // يمكنك استخدام الصورة الخاصة بك هنا
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -123,17 +121,6 @@ export default function CardComponent() {
                       flexShrink: 0, // منع الانكماش
                     }}
                   />
-                  <IconButton
-                    sx={{
-                      position: "absolute",
-                      top: 10,
-                      left: 10,
-                      color: "white",
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    }}
-                  >
-                    <FavoriteIcon />
-                  </IconButton>
                   <Button
                     variant="contained"
                     color={prop.status === "sell" ? "success" : "error"}

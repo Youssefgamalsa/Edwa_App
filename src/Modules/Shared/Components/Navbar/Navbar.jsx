@@ -87,7 +87,7 @@ function Navbar() {
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
-              fontWeight: 700,
+              fontWeight: 600,
               fontSize: "24px",
               letterSpacing: ".3rem",
               color: "inherit",
@@ -124,10 +124,16 @@ function Navbar() {
                       component={Link}
                       to={page.link}
                       onClick={toggleDrawer(false)}
+                      className="text-primary"
                     >
                       <Typography
-                        sx={{ textAlign: "right", padding: 2, color: "#000" , marginLeft:"5px"}}
-                      
+                        sx={{
+                          textAlign: "right",
+
+                          color: "#007bff ",
+                          marginLeft: "5px",
+                          fontSize: "20px",
+                        }}
                       >
                         {page.name}
                       </Typography>
@@ -144,7 +150,11 @@ function Navbar() {
                       onClick={toggleDrawer(false)}
                     >
                       <Typography
-                        sx={{ textAlign: "right", padding: 2, color: "#000" }}
+                        sx={{
+                          textAlign: "right",
+                          color: "#007bff",
+                          fontSize: "20px",
+                        }}
                       >
                         {setting.name}
                       </Typography>
@@ -165,7 +175,7 @@ function Navbar() {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
-              fontWeight: 700,
+              fontWeight: 600,
               fontSize: "24px",
               letterSpacing: ".3rem",
               color: "inherit",
@@ -184,13 +194,10 @@ function Navbar() {
                 sx={{
                   my: 2,
                   display: "block",
-                  fontSize: "16px",
-                  padding: "10px",
-                  color: "#000",
+                  fontSize: "20px",
+                  color: "#007bff",
                 }}
-                  className="btn btn-outline-danger"
               >
-              
                 {page.name}
               </Button>
             ))}

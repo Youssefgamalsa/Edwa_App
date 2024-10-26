@@ -80,190 +80,191 @@ export default function ShowAqar() {
   };
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        margin: "auto",
-        textAlign: "right",
-        direction: "rtl",
-        bgcolor: "#f9f9f9",
-        padding: "20px",
-        borderRadius: "8px",
-      }}
-    >
+    <>
       <Typography variant="h4" textAlign="center" mb={3}>
         اضافة العقار
       </Typography>
-
-      <form
-        className="shadow col-lg-9 m-auto p-4"
-        onSubmit={handleSubmit(submit)}
+      <Box
+        sx={{
+          width: "100%",
+          margin: "auto",
+          textAlign: "right",
+          direction: "rtl",
+          bgcolor: "#f9f9f9",
+          // padding: "20px",
+          borderRadius: "8px",
+        }}
       >
-        <select
-          className="form-select w-100 w-md-20 text-center text-md-left"
-          style={{ width: "20%", margin: "20px auto" }}
-          {...register("status")}
-          defaultValue="" // استخدام defaultValue لتحديد القيمة الافتراضية
+        <form
+          className="shadow col-lg-9 m-auto p-4 col-md-12"
+          onSubmit={handleSubmit(submit)}
         >
-          <option value="" disabled>
-            نوع العقد
-          </option>
-          <option value="rent">ايجار</option>
-          <option value="sell">للبيع</option>
-        </select>
-        <Box mb={3}>
-          <TextField
-            id="title"
-            label="title"
-            type="text"
-            fullWidth
-            variant="outlined"
-            placeholder="title"
-            {...register("title", { required: "Title is Required " })}
-            error={!!errors.title}
-            helperText={errors.title ? errors.title.message : ""}
-            sx={{ bgcolor: "#f0f4ff" }}
-          />
-        </Box>
-        {/* السعر */}
-        <Box mb={3}>
-          <TextField
-            id="price"
-            label="السعر"
-            type="text"
-            fullWidth
-            variant="outlined"
-            placeholder=" السعر جنيه"
-            {...register("price", { required: "السعر مطلوب" })}
-            error={!!errors.price}
-            helperText={errors.price ? errors.price.message : ""}
-            sx={{ bgcolor: "#f0f4ff" }}
-          />
-        </Box>
-        {/* المساحة وسعر المتر */}
-        <Box display="flex" justifyContent="space-between" mb={3}>
-          <TextField
-            id="area"
-            label="المساحة بالمتر"
-            variant="outlined"
-            placeholder="المساحة بالمتر"
-            {...register("area", { required: "المساحة مطلوبة" })}
-            error={!!errors.area}
-            helperText={errors.area ? errors.area.message : ""}
-            sx={{ bgcolor: "#f0f4ff", width: "100%" }}
-          />
-        </Box>
-        {/* العنوان */}
-        <Box mb={3}>
-          <TextField
-            id="address"
-            label="المدينه "
-            fullWidth
-            variant="outlined"
-            placeholder="المدينه "
-            {...register("location", { required: "المدينه " })}
-            error={!!errors.location}
-            helperText={errors.location ? errors.location.message : ""}
-            sx={{ bgcolor: "#f0f4ff" }}
-          />
-        </Box>
-        <Box display="flex" justifyContent="space-between" mb={3}>
-          <TextField
-            id="bedrooms"
-            label="عدد الغرف الرءيسيه "
-            variant="outlined"
-            placeholder=" عدد الغرف الرءيسيه  "
-            {...register("bedrooms", {
-              required: "عدد الغرف الرءيسيه مطلوبة  ",
-            })}
-            error={!!errors.bedrooms}
-            helperText={errors.bedrooms ? errors.bedrooms.message : ""}
-            sx={{ bgcolor: "#f0f4ff", width: "100%" }}
-          />
-        </Box>{" "}
-        <Box display="flex" justifyContent="space-between" mb={3}>
-          <TextField
-            id="bathrooms"
-            label=" عدد الحمامات "
-            variant="outlined"
-            placeholder=" عدد الحمامات "
-            {...register("bathrooms", { required: "عدد الحمامات مطلوبة" })}
-            error={!!errors.bathrooms}
-            helperText={errors.bathrooms ? errors.bathrooms.message : ""}
-            sx={{ bgcolor: "#f0f4ff", width: "100%" }}
-          />
-        </Box>
-        {/* الوصف */}
-        <Box mb={3}>
-          <TextField
-            id="description"
-            label="وصف العقار"
-            multiline
-            rows={5}
-            fullWidth
-            variant="outlined"
-            placeholder="وصف شامل للعقار "
-            {...register("description", { required: "الوصف مطلوب" })}
-            error={!!errors.description}
-            helperText={errors.description ? errors.description.message : ""}
-            sx={{ bgcolor: "#f0f4ff" }}
-          />
-        </Box>
-        {/* رفع الصورة */}
-        <Box mb={4} sx={{ position: "relative" }}>
-          <Typography variant="h6" color="error" mb={2}>
-            إضافة صور رئيسية للعقار
-          </Typography>
-          <Box
-            sx={{
-              padding: "10px",
-              border: "2px dashed rgba(0, 128, 0, 0.5)",
-              bgcolor: "rgba(240, 255, 239, 1)",
-              borderRadius: "5px",
-              textAlign: "center",
-              cursor: "pointer",
-              position: "relative",
-            }}
+          <select
+            className="form-select w-100 w-md-20 text-center text-md-left"
+            style={{ width: "20%", margin: "20px auto" }}
+            {...register("status")}
+            defaultValue="" // استخدام defaultValue لتحديد القيمة الافتراضية
           >
-            <Typography variant="h5" color="primary">
-              رفع صور العقار
-            </Typography>
-            <input
-              type="file"
-              multiple
-              {...register("images", { required: "الصور مطلوبة" })}
-              style={{
-                opacity: 0,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                cursor: "pointer",
-              }}
+            <option value="" disabled>
+              نوع العقد
+            </option>
+            <option value="rent">ايجار</option>
+            <option value="sell">للبيع</option>
+          </select>
+          <Box mb={3}>
+            <TextField
+              id="title"
+              label="title"
+              type="text"
+              fullWidth
+              variant="outlined"
+              placeholder="title"
+              {...register("title", { required: "Title is Required " })}
+              error={!!errors.title}
+              helperText={errors.title ? errors.title.message : ""}
+              sx={{ bgcolor: "#f0f4ff" }}
             />
           </Box>
-        </Box>
-        <Box display="flex" justifyContent="center" gap={2}>
-          <Button
-            variant="outlined"
-            color="primary"
-            // endIcon={<CreateIcon />}
-            sx={{ padding: "10px 20px", borderRadius: "5px" }}
-            type="submit"
-          >
-            إنشاء
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            // endIcon={<CloseIcon />}
-            sx={{ padding: "10px 20px", borderRadius: "5px" }}
-          >
-            إغلاق
-          </Button>
-        </Box>
-      </form>
-    </Box>
+          {/* السعر */}
+          <Box mb={3}>
+            <TextField
+              id="price"
+              label="السعر"
+              type="text"
+              fullWidth
+              variant="outlined"
+              placeholder=" السعر جنيه"
+              {...register("price", { required: "السعر مطلوب" })}
+              error={!!errors.price}
+              helperText={errors.price ? errors.price.message : ""}
+              sx={{ bgcolor: "#f0f4ff" }}
+            />
+          </Box>
+          {/* المساحة وسعر المتر */}
+          <Box display="flex" justifyContent="space-between" mb={3}>
+            <TextField
+              id="area"
+              label="المساحة بالمتر"
+              variant="outlined"
+              placeholder="المساحة بالمتر"
+              {...register("area", { required: "المساحة مطلوبة" })}
+              error={!!errors.area}
+              helperText={errors.area ? errors.area.message : ""}
+              sx={{ bgcolor: "#f0f4ff", width: "100%" }}
+            />
+          </Box>
+          {/* العنوان */}
+          <Box mb={3}>
+            <TextField
+              id="address"
+              label="المدينه "
+              fullWidth
+              variant="outlined"
+              placeholder="المدينه "
+              {...register("location", { required: "المدينه " })}
+              error={!!errors.location}
+              helperText={errors.location ? errors.location.message : ""}
+              sx={{ bgcolor: "#f0f4ff" }}
+            />
+          </Box>
+          <Box display="flex" justifyContent="space-between" mb={3}>
+            <TextField
+              id="bedrooms"
+              label="عدد الغرف الرءيسيه "
+              variant="outlined"
+              placeholder=" عدد الغرف الرءيسيه  "
+              {...register("bedrooms", {
+                required: "عدد الغرف الرءيسيه مطلوبة  ",
+              })}
+              error={!!errors.bedrooms}
+              helperText={errors.bedrooms ? errors.bedrooms.message : ""}
+              sx={{ bgcolor: "#f0f4ff", width: "100%" }}
+            />
+          </Box>{" "}
+          <Box display="flex" justifyContent="space-between" mb={3}>
+            <TextField
+              id="bathrooms"
+              label=" عدد الحمامات "
+              variant="outlined"
+              placeholder=" عدد الحمامات "
+              {...register("bathrooms", { required: "عدد الحمامات مطلوبة" })}
+              error={!!errors.bathrooms}
+              helperText={errors.bathrooms ? errors.bathrooms.message : ""}
+              sx={{ bgcolor: "#f0f4ff", width: "100%" }}
+            />
+          </Box>
+          {/* الوصف */}
+          <Box mb={3}>
+            <TextField
+              id="description"
+              label="وصف العقار"
+              multiline
+              rows={5}
+              fullWidth
+              variant="outlined"
+              placeholder="وصف شامل للعقار "
+              {...register("description", { required: "الوصف مطلوب" })}
+              error={!!errors.description}
+              helperText={errors.description ? errors.description.message : ""}
+              sx={{ bgcolor: "#f0f4ff" }}
+            />
+          </Box>
+          {/* رفع الصورة */}
+          <Box mb={4} sx={{ position: "relative" }}>
+            <Typography variant="h6" color="error" mb={2}>
+              إضافة صور رئيسية للعقار
+            </Typography>
+            <Box
+              sx={{
+                padding: "10px",
+                border: "2px dashed rgba(0, 128, 0, 0.5)",
+                bgcolor: "rgba(240, 255, 239, 1)",
+                borderRadius: "5px",
+                textAlign: "center",
+                cursor: "pointer",
+                position: "relative",
+              }}
+            >
+              <Typography variant="h5" color="primary">
+                رفع صور العقار
+              </Typography>
+              <input
+                type="file"
+                multiple
+                {...register("images", { required: "الصور مطلوبة" })}
+                style={{
+                  opacity: 0,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  cursor: "pointer",
+                }}
+              />
+            </Box>
+          </Box>
+          <Box display="flex" justifyContent="center" gap={2}>
+            <Button
+              variant="outlined"
+              color="primary"
+              // endIcon={<CreateIcon />}
+              sx={{ padding: "10px 20px", borderRadius: "5px" }}
+              type="submit"
+            >
+              إنشاء
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              // endIcon={<CloseIcon />}
+              sx={{ padding: "10px 20px", borderRadius: "5px" }}
+            >
+              إغلاق
+            </Button>
+          </Box>
+        </form>
+      </Box>
+    </>
   );
 }
