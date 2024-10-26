@@ -47,7 +47,7 @@ export default function Register() {
         <div className="col-12 col-lg-11 col-xl-10">
           <div className="card-body p-4">
             <div className="mb-4 text-center">
-              <h3 className="text-4xl">Sign up</h3>
+              <h3 className="text-4xl">Register ANew Seller </h3>
               <p>
                 If you already have an account,{" "}
                 <Link
