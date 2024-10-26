@@ -80,7 +80,7 @@ export default function CardFormat() {
                   src={imag.url}
                   alt={`Slide ${index + 1}`}
                   style={{
-                    height: "300px",
+                    height: "350px",
                     objectFit: "cover",
                     borderRadius: "10px",
                   }}
@@ -119,7 +119,7 @@ export default function CardFormat() {
         </Box>
 
         <Grid container spacing={4} className="details">
-          <Grid item lg={6} md={12}>
+          <Grid item lg={6} md={12} sm={12}>
             <Paper
               sx={{ overflow: "hidden", margin: "20px", borderRadius: "8px" }}
             >

@@ -33,8 +33,10 @@ export default function Register() {
         }
       );
       console.log(res);
-      toast.success("Sign Up Successfully");
-      nav('/auth/verify');
+      toast.success(
+        "Sign Up Successfully , OTP is sent to your email check your email  "
+      );
+      nav("/auth/verify");
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.errorr);
