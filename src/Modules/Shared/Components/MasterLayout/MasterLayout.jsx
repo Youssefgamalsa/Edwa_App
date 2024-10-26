@@ -8,7 +8,7 @@ export default function MasterLayout() {
   return (
     <Box>
       <Navbar />
-      <Box sx={{ mx: "30px", mt: "90px" }}>
+      <Box sx={{ mt: "90px" , mx:"10px" }}>
         <Outlet />
       </Box>
       <Box sx={{direction:"ltr"}}>

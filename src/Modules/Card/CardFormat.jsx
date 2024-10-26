@@ -2,6 +2,7 @@
 import img from "../../../src/assets/img/user-placeholder.png";
 // import { Carousel } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
+// import Moment from 'react-moment';
 import {
   Button,
   Typography,
@@ -57,9 +58,8 @@ export default function CardFormat() {
       style={{
         direction: "rtl",
         overflow: "hidden",
-        padding: "5px",
         backgroundColor: "#f5f5f5",
-        maxWidth: "1500px",
+        width:'100%',
         margin: "0 auto",
         // minWidth:"480px"
       }}
@@ -176,7 +176,7 @@ export default function CardFormat() {
               }}
             >
               <CardContent>
-                <Grid container spacing={2}>
+                <Grid container className="my-3 mx-1">
                   <Grid item md={4}>
                     <img
                       src={img}
