@@ -30,10 +30,11 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const user = useContext(AuthContext);
   const [userid, setUserid] = React.useState();
+  const token = localStorage.getItem("token");
   // نقل useContext خارج useEffect
   const settings = [
     { name: "My Profile", link: `/profile/${userid}` },
-    { name: "Logout", link: "auth/logout" },
+    token ? { name: "Logout", link: "auth/logout" } : "",
   ];
   useEffect(() => {
     console.log(user);
