@@ -15,7 +15,7 @@ export default function Footer() {
     <MDBFooter bgColor="light" className="text-center text-lg-start text-muted">
       <div className="text-center">
         <button
-          className="btn btn-primary mb-3"
+          className="btn btn-primary my-4"
           onClick={() => nav("/showdata")}
         >
           اعلن عن عقارك مجانا{" "}

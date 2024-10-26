@@ -27,16 +27,10 @@ export default function CardFormat() {
   const [userid, setUserid] = useState();
   const [prop, setProp] = useState({});
   const [images, setImages] = useState([]);
-  const [token] = localStorage.getItem("token");
   const getproperty = async () => {
     try {
       let response = await axios.get(
-        `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property/${id}`,
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
+        `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property/${id}`
       );
 
       setProp(response.data.property);
@@ -63,9 +57,11 @@ export default function CardFormat() {
       style={{
         direction: "rtl",
         overflow: "hidden",
+        padding: "5px",
         backgroundColor: "#f5f5f5",
-        maxWidth: "1500px", // تحديد الحد الأقصى لعرض العنصر
-        margin: "0 auto", // مركزي العنصر
+        maxWidth: "1500px",
+        margin: "0 auto",
+        // minWidth:"480px"
       }}
     >
       <>

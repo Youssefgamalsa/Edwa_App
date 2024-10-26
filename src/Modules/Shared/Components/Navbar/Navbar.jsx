@@ -33,7 +33,7 @@ function Navbar() {
   const token = localStorage.getItem("token");
   // نقل useContext خارج useEffect
   const settings = [
-    { name: "My Profile", link: `/profile/${userid}` },
+    token ? { name: "My Profile", link: `/profile/${userid}` } : "",
     token ? { name: "Logout", link: "auth/logout" } : "",
   ];
   useEffect(() => {
