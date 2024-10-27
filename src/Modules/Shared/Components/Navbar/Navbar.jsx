@@ -21,7 +21,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import logo from "../../../../assets/img/logon.png";
 
 function Navbar() {
-  const [token] = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   const pages = [
     { name: "اعلن عن عقارك مجانا ", link: "/showdata" },
