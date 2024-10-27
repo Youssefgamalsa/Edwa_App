@@ -1,8 +1,5 @@
-// import React from "react";
 import img from "../../../src/assets/img/user-placeholder.png";
-// import { Carousel } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
-// import Moment from 'react-moment';
 import {
   Button,
   Typography,
@@ -22,12 +19,15 @@ import PlaceIcon from "@mui/icons-material/Place";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
+import moment from "moment";
 
 export default function CardFormat() {
   const { id } = useParams();
   const [userid, setUserid] = useState();
   const [prop, setProp] = useState({});
   const [images, setImages] = useState([]);
+  const date = moment(prop.listedDate);
+  const forma = date.format("MMMM Do YYYY, h:mm:ss a");
   const getproperty = async () => {
     try {
       let response = await axios.get(
@@ -50,6 +50,7 @@ export default function CardFormat() {
   useEffect(() => {
     getproperty();
     console.log(id);
+    // console.log(moment(prop.listedDate, "MMMM Do YYYY, h:mm:ss a"));
   }, [id]);
 
   return (
@@ -59,7 +60,7 @@ export default function CardFormat() {
         direction: "rtl",
         overflow: "hidden",
         backgroundColor: "#f5f5f5",
-        width:'100%',
+        width: "100%",
         margin: "0 auto",
         // minWidth:"480px"
       }}
@@ -194,7 +195,7 @@ export default function CardFormat() {
                       {prop?.owner?.firstName} {prop?.owner?.lastName}
                     </Typography>
                     <Typography variant="body2">
-                      تاريخ النشر: {prop.listedDate}
+                      تاريخ النشر: {forma}
                     </Typography>
                   </Grid>
                 </Grid>

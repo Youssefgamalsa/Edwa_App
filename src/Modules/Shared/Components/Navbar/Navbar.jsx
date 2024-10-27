@@ -20,21 +20,23 @@ import { useEffect, useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 import logo from "../../../../assets/img/logon.png";
 
-const pages = [
-  { name: "اعلن عن عقارك مجانا ", link: "/showdata" },
-  { name: "تسجيل الدخول  ", link: "/auth/login" },
-];
-
 function Navbar() {
+  const [token] = localStorage.getItem("token");
+
+  const pages = [
+    { name: "اعلن عن عقارك مجانا ", link: "/showdata" },
+    token == null ? { name: "تسجيل الدخول  ", link: "/auth/login" } : "",
+  ];
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const user = useContext(AuthContext);
   const [userid, setUserid] = React.useState();
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
   // نقل useContext خارج useEffect
   const settings = [
     token ? { name: "My Profile", link: `/profile/${userid}` } : "",
-    token ? { name: "Logout", link: "auth/logout" } : "",
+    token ? { name: "Logout", link: "" } : "",
+    !token ? { name: "انشاء حساب جديد ", link: "auth/register" } : "",
   ];
   useEffect(() => {
     console.log(user);

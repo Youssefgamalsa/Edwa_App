@@ -19,6 +19,9 @@ import axios from "axios";
 import { Carousel } from "react-bootstrap";
 import Nodata from "../Nodata/Nodata";
 import LoadingPage from "../../../../LoadingPage/LoadingPage";
+import img10 from "../../../../assets/img/10.png";
+import img11 from "../../../../assets/img/11.png";
+import img12 from "../../../../assets/img/12.png";
 
 export default function CardComponent() {
   const [all_property, setAll_property] = useState([]);
@@ -26,6 +29,7 @@ export default function CardComponent() {
   const [page, setPage] = useState(1);
   const nav = useNavigate();
   const [load, setLoad] = useState(true);
+  const images = [img10, img11, img12];
 
   const get_all_properity = async (pages) => {
     setLoad(true);
@@ -66,14 +70,14 @@ export default function CardComponent() {
           controls={true}
           indicators={true}
         >
-          {[...Array(3)].map((_, index) => (
+          {images.map((imag, index) => (
             <Carousel.Item key={index}>
               <img
                 className="d-block w-100"
-                src={img}
+                src={imag}
                 alt={`Slide ${index + 1}`}
                 style={{
-                  maxHeight: "400px",
+                  height: "300px",
                   objectFit: "cover",
                   borderRadius: "10px",
                   boxShadow: "0 4px 8px rgba(0,0,0,0.2)",

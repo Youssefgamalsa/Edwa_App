@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --primary-color: #152c5b;
   --btn-color: #3252DF;
