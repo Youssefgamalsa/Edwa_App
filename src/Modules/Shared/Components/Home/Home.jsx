@@ -229,7 +229,7 @@ export default function CardComponent() {
                     </Table>
                     <Box className="d-flex justify-content-between align-content-center mt-3 ">
                       <button
-                        className="btn btn-danger"
+                        className="btn btn-primary"
                         onClick={() => nav(`/${prop._id}`)}
                         style={{ fontSize: "16px" }}
                       >

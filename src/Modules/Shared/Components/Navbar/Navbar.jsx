@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
+// import SettingsIcon from "@mui/material/SettingsIcon";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
@@ -19,6 +19,7 @@ import ListItem from "@mui/material/ListItem";
 import { useEffect, useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 import logo from "../../../../assets/img/logon.png";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 function Navbar() {
   const token = localStorage.getItem("token");
@@ -39,9 +40,7 @@ function Navbar() {
         token ? { name: "My Profile", link: `/profile/${userid}` } : "",
         token ? { name: "Logout", link: "" } : "",
       ]
-    : [
-        !token ? { name: "انشاء حساب جديد ", link: "auth/register" } : "",
-    ];
+    : [!token ? { name: "انشاء حساب جديد ", link: "auth/register" } : ""];
   useEffect(() => {
     console.log(user);
     setUserid(user?.userData?.id);
@@ -110,14 +109,14 @@ function Navbar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
+            <SettingsIcon
               size="large"
               aria-label="menu"
               onClick={toggleDrawer(true)}
               color="inherit"
             >
               <MenuIcon />
-            </IconButton>
+            </SettingsIcon>
             <Drawer
               anchor="right"
               open={drawerOpen}
@@ -159,7 +158,11 @@ function Navbar() {
                       key={setting.name}
                       component={Link}
                       to={setting.link}
-                      onClick={toggleDrawer(false)}
+                      onClick={
+                        setting.name === "Logout"
+                          ? RemoveAccount
+                          : handleCloseUserMenu
+                      }
                     >
                       <Typography
                         sx={{
@@ -217,9 +220,9 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="فتح الإعدادات">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <SettingsIcon onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AccountCircleIcon sx={{ fontSize: "40px" }} />
-              </IconButton>
+              </SettingsIcon>
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
