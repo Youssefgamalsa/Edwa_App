@@ -21,6 +21,7 @@ export default function ShowAqar() {
     if (!token) {
       nav("/auth/login");
     }
+    window.scrollTo(0, 20);
   }, [token, nav]);
 
   // const append_to_form_data = (data) => {

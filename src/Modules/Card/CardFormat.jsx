@@ -51,6 +51,7 @@ export default function CardFormat() {
     getproperty();
     console.log(id);
     // console.log(moment(prop.listedDate, "MMMM Do YYYY, h:mm:ss a"));
+    window.scrollTo(0, 20);
   }, [id]);
 
   return (

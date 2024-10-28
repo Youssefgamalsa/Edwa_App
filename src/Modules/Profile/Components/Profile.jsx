@@ -82,6 +82,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
+    window.scrollTo(0, 20);
   }, [id]);
   return (
     <Box sx={{ flexGrow: 1, p: 3, direction: "rtl" }}>

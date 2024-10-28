@@ -26,6 +26,7 @@ function Navbar() {
   const pages = [
     { name: "اعلن عن عقارك مجانا ", link: "/showdata" },
     token == null ? { name: "تسجيل الدخول  ", link: "/auth/login" } : "",
+    // !token ? { name: "انشاء حساب جديد ", link: "auth/register" } : "",
   ];
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -33,11 +34,14 @@ function Navbar() {
   const [userid, setUserid] = React.useState();
   // const token = localStorage.getItem("token");
   // نقل useContext خارج useEffect
-  const settings = [
-    token ? { name: "My Profile", link: `/profile/${userid}` } : "",
-    token ? { name: "Logout", link: "" } : "",
-    !token ? { name: "انشاء حساب جديد ", link: "auth/register" } : "",
-  ];
+  const settings = token
+    ? [
+        token ? { name: "My Profile", link: `/profile/${userid}` } : "",
+        token ? { name: "Logout", link: "" } : "",
+      ]
+    : [
+        !token ? { name: "انشاء حساب جديد ", link: "auth/register" } : "",
+    ];
   useEffect(() => {
     console.log(user);
     setUserid(user?.userData?.id);
@@ -97,7 +101,12 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            <img src={logo} alt="" width={"100px"} />
+            <img
+              src={logo}
+              alt=""
+              width={"100px"}
+              style={{ marginLeft: "20px" }}
+            />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -145,7 +154,7 @@ function Navbar() {
                 </List>
                 <Divider />
                 <List>
-                  {settings.map((setting) => (
+                  {settings?.map((setting) => (
                     <ListItem
                       key={setting.name}
                       component={Link}
@@ -227,7 +236,7 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settings?.map((setting) => (
                 <MenuItem
                   key={setting.name}
                   onClick={

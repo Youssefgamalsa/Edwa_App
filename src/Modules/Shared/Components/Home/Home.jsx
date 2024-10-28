@@ -53,6 +53,7 @@ export default function CardComponent() {
 
   useEffect(() => {
     get_all_properity(1);
+    window.scrollTo(0, 20);
   }, []);
 
   const handleChange = (event, value) => {
@@ -153,20 +154,6 @@ export default function CardComponent() {
                       }}
                     >
                       {prop.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        textAlign: "right",
-                        fontSize: {
-                          xs: "0.875rem",
-                          sm: "1rem",
-                          marginBottom: "30px",
-                        },
-                        fontFamily: "'Roboto', sans-serif",
-                      }}
-                    >
-                      {prop.description}
                     </Typography>
                     <Table
                       size="small"
