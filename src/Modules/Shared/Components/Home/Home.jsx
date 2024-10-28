@@ -122,7 +122,7 @@ export default function CardComponent() {
                       transform: "scale(1.03)",
                     },
                   }}
-                  // onClick={() => nav(`/${prop._id}`)}
+                  onClick={() => nav(`/${prop._id}`)}
                 >
                   <CardMedia
                     component="img"
@@ -149,7 +149,7 @@ export default function CardComponent() {
                       variant="h6"
                       sx={{
                         textAlign: "right",
-                        fontSize: "35px",
+                        fontSize: "27px",
                         fontFamily: "'Roboto', sans-serif",
                       }}
                     >
