@@ -27,7 +27,7 @@ export default function Profile() {
 
   const userTrue = useContext(AuthContext);
   const userid = userTrue?.userData?.id;
-  const role = userTrue.userData.role;
+  const role = userTrue?.userData?.role;
   const tree = role == "admin" || userid == id;
   console.log(userTrue);
 
@@ -62,7 +62,7 @@ export default function Profile() {
       }
     );
     console.log(response);
-    getUser()
+    getUser();
   };
   const getUser = async () => {
     setLoad(true);
@@ -104,7 +104,7 @@ export default function Profile() {
             {user.firstName} {user.lastName}
           </Typography>
           <Button variant="outlined" color="error" sx={{ mt: 2 }}>
-            {user.phone}
+            {tree ? user.phone : "01125683265"}
           </Button>
         </Grid>
       </Grid>
