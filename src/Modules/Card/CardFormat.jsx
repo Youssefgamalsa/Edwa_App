@@ -211,7 +211,7 @@ export default function CardFormat() {
                   </Button>
                   <a
                     className="w-100 mb-3 btn btn-success"
-                    href={`https://wa.me/1125683265/?text=اريد ان اعرف معلومات اكثر عن العقار `}
+                    href={`https://wa.me/1150671055/?text=اريد ان اعرف معلومات اكثر عن العقار `}
                   >
                     تواصل مع واتساب <WhatsApp />
                   </a>
