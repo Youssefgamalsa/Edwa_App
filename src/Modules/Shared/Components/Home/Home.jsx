@@ -22,7 +22,6 @@ import LoadingPage from "../../../../LoadingPage/LoadingPage";
 import img10 from "../../../../assets/img/10.png";
 import img11 from "../../../../assets/img/11.png";
 import img12 from "../../../../assets/img/12.png";
-import { useForm } from "react-hook-form";
 
 export default function CardComponent() {
   const [all_property, setAll_property] = useState([]);
@@ -31,7 +30,6 @@ export default function CardComponent() {
   const nav = useNavigate();
   const [load, setLoad] = useState(true);
   const images = [img10, img11, img12];
-  const { register, handleSubmit } = useForm();
 
   const get_all_properity = async (pages, status, location) => {
     setLoad(true);
@@ -65,10 +63,6 @@ export default function CardComponent() {
     get_all_properity(value);
   };
 
-  const handle_search = (data) => {
-    get_all_properity(page, data.status, data.location);
-  };
-
   return (
     <>
       <Box mb={4}>
@@ -96,39 +90,6 @@ export default function CardComponent() {
           ))}
         </Carousel>
       </Box>
-
-      <form
-        onSubmit={handleSubmit(handle_search)}
-        className="search_bar shadow-lg d-flex flex-column flex-md-row"
-      >
-        <select
-          className="form-select w-100 w-md-20 text-center text-md-left"
-          style={{ margin: "5px 0" }}
-          {...register("status")}
-        >
-          <option selected>نوع العقد</option>
-          <option value="rent"> ايجار</option>
-          <option value="sell"> للبيع</option>
-        </select>
-        <select
-          className="form-select w-100 w-md-20 text-center text-md-left"
-          style={{ margin: "5px 0" }}
-          {...register("location")}
-        >
-          <option selected> المدينه</option>
-          <option value="العدوه"> العدوه</option>
-          <option value="مغاغه"> مغاغه</option>
-          <option value="المنيا"> المنيا</option>
-        </select>
-        <button
-          type="submit"
-          className="btn btn-outline-danger w-100 w-md-20"
-          style={{ margin: "5px 0" }}
-        >
-          بحث
-        </button>
-      </form>
-
       <h2
         className="text-center text-primary my-3"
         style={{
@@ -182,7 +143,13 @@ export default function CardComponent() {
                   >
                     {prop.status === "sell" ? "للبيع" : "للايجار"}
                   </Button>
-                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                  <CardContent
+                    sx={{
+                      flexGrow: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
                     <Typography
                       variant="h6"
                       sx={{
@@ -193,47 +160,70 @@ export default function CardComponent() {
                     >
                       {prop.title}
                     </Typography>
-                    <Table size="small" sx={{ width: "100%", tableLayout: "fixed" }}>
+                    <Table
+                      size="small"
+                      sx={{ width: "100%", tableLayout: "fixed" }}
+                    >
                       <TableBody>
                         <TableRow>
-                          <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
+                          <TableCell
+                            sx={{ borderBottom: "none", textAlign: "center" }}
+                          >
                             الموقع
                           </TableCell>
-                          <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
+                          <TableCell
+                            sx={{ borderBottom: "none", textAlign: "center" }}
+                          >
                             المساحة
                           </TableCell>
                           {prop.bathrooms !== 0 && (
-                            <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
+                            <TableCell
+                              sx={{ borderBottom: "none", textAlign: "center" }}
+                            >
                               عدد الغرف
                             </TableCell>
                           )}
                           {prop.bedrooms !== 0 && (
-                            <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
+                            <TableCell
+                              sx={{ borderBottom: "none", textAlign: "center" }}
+                            >
                               عدد الحمامات
                             </TableCell>
                           )}
                         </TableRow>
                         <TableRow>
-                          <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
-                            <i className="fa-solid fa-location-dot mx-2"></i> {prop.location}
+                          <TableCell
+                            sx={{ borderBottom: "none", textAlign: "center" }}
+                          >
+                            <i className="fa-solid fa-location-dot mx-2"></i>{" "}
+                            {prop.location}
                           </TableCell>
-                          <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
-                            <i className="fa-solid fa-house mx-2"></i> {prop.area} م²
+                          <TableCell
+                            sx={{ borderBottom: "none", textAlign: "center" }}
+                          >
+                            <i className="fa-solid fa-house mx-2"></i>{" "}
+                            {prop.area} م²
                           </TableCell>
                           {prop.bedrooms !== 0 && (
-                            <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
-                              <i className="fa-solid fa-bed mx-2"></i> {prop.bedrooms}
+                            <TableCell
+                              sx={{ borderBottom: "none", textAlign: "center" }}
+                            >
+                              <i className="fa-solid fa-bed mx-2"></i>{" "}
+                              {prop.bedrooms}
                             </TableCell>
                           )}
                           {prop.bathrooms !== 0 && (
-                            <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
-                              <i className="fa-solid fa-bath mx-2"></i> {prop.bathrooms}
+                            <TableCell
+                              sx={{ borderBottom: "none", textAlign: "center" }}
+                            >
+                              <i className="fa-solid fa-bath mx-2"></i>{" "}
+                              {prop.bathrooms}
                             </TableCell>
                           )}
                         </TableRow>
                       </TableBody>
                     </Table>
-                    <Box className="d-flex justify-content-between align-content-center mt-auto">
+                    <Box className="d-flex justify-content-between align-content-center mt-3">
                       <button
                         className="btn btn-primary"
                         onClick={() => nav(`/${prop._id}`)}
