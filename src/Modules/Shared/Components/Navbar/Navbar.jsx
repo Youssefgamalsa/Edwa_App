@@ -246,16 +246,7 @@ function Navbar() {
                   component={Link}
                   to={setting.name === "Logout" ? "#" : setting.link}
                 >
-                  <Typography
-                    sx={{
-                      textAlign: "center",
-                      backgroundColor: "green",
-                      color: "#fff",
-                      padding: "5px",
-                    }}
-                  >
-                    {setting.name}
-                  </Typography>
+                  <Typography>{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

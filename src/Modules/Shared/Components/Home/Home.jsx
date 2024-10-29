@@ -171,8 +171,8 @@ export default function CardComponent() {
                     alt="Card image"
                     sx={{
                       objectFit: "cover",
-                      width: "100%", 
-                      flexShrink: 0,  
+                      width: "100%",
+                      flexShrink: 0,
                     }}
                   />
                   <Button
@@ -269,7 +269,7 @@ export default function CardComponent() {
                       <button
                         className="btn btn-primary"
                         onClick={() => nav(`/${prop._id}`)}
-                        style={{ fontSize: "16px", width:"120px" }}
+                        style={{ fontSize: "16px"  }}
                       >
                         عرض التفاصيل{" "}
                       </button>
