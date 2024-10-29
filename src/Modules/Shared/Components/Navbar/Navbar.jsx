@@ -3,7 +3,6 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-// import SettingsIcon from "@mui/material/SettingsIcon";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
@@ -18,9 +17,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { useEffect, useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
-import logo from "../../../../assets/img/logon.png";
-import SettingsIcon from "@mui/icons-material/Settings";
-
+import logo from "../../../../assets/img/logon1.png";
 function Navbar() {
   const token = localStorage.getItem("token");
 
@@ -109,14 +106,13 @@ function Navbar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <SettingsIcon
+            <MenuIcon
               size="large"
               aria-label="menu"
               onClick={toggleDrawer(true)}
-              color="inherit"
             >
               <MenuIcon />
-            </SettingsIcon>
+            </MenuIcon>
             <Drawer
               anchor="right"
               open={drawerOpen}
@@ -140,7 +136,6 @@ function Navbar() {
                       <Typography
                         sx={{
                           textAlign: "right",
-
                           color: "#007bff ",
                           marginLeft: "5px",
                           fontSize: "20px",
@@ -220,9 +215,9 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="فتح الإعدادات">
-              <SettingsIcon onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <AccountCircleIcon onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AccountCircleIcon sx={{ fontSize: "40px" }} />
-              </SettingsIcon>
+              </AccountCircleIcon>
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
@@ -247,10 +242,18 @@ function Navbar() {
                       ? RemoveAccount
                       : handleCloseUserMenu
                   }
+                  sx={{ padding: "20px" }}
                   component={Link}
                   to={setting.name === "Logout" ? "#" : setting.link}
                 >
-                  <Typography sx={{ textAlign: "center" }}>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      backgroundColor: "green",
+                      color: "#fff",
+                      padding: "5px",
+                    }}
+                  >
                     {setting.name}
                   </Typography>
                 </MenuItem>

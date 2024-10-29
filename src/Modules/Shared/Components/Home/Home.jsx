@@ -22,6 +22,7 @@ import LoadingPage from "../../../../LoadingPage/LoadingPage";
 import img10 from "../../../../assets/img/10.png";
 import img11 from "../../../../assets/img/11.png";
 import img12 from "../../../../assets/img/12.png";
+import { useForm } from "react-hook-form";
 
 export default function CardComponent() {
   const [all_property, setAll_property] = useState([]);
@@ -30,8 +31,9 @@ export default function CardComponent() {
   const nav = useNavigate();
   const [load, setLoad] = useState(true);
   const images = [img10, img11, img12];
+  const { register, handleSubmit } = useForm();
 
-  const get_all_properity = async (pages) => {
+  const get_all_properity = async (pages, status, location) => {
     setLoad(true);
     try {
       let response = await axios.get(
@@ -39,6 +41,8 @@ export default function CardComponent() {
         {
           params: {
             page: pages,
+            status: status,
+            location: location,
           },
         }
       );
@@ -52,13 +56,17 @@ export default function CardComponent() {
   };
 
   useEffect(() => {
-    get_all_properity(1);
+    get_all_properity(1, "sell");
     window.scrollTo(0, 20);
   }, []);
 
   const handleChange = (event, value) => {
     setPage(value);
     get_all_properity(value);
+  };
+
+  const handle_search = (data) => {
+    get_all_properity(page, data.status, data.location);
   };
 
   return (
@@ -88,6 +96,38 @@ export default function CardComponent() {
           ))}
         </Carousel>
       </Box>
+
+      <form
+        onSubmit={handleSubmit(handle_search)}
+        className="search_bar shadow-lg d-flex flex-column flex-md-row"
+      >
+        <select
+          className="form-select w-100 w-md-20 text-center text-md-left"
+          style={{ width: "20%", margin: "auto" }}
+          {...register("status")}
+        >
+          <option selected>نوع العقد </option>
+          <option value="rent"> ايجار </option>
+          <option value="sell"> للبيع </option>
+        </select>
+        <select
+          className="form-select w-100 w-md-20 text-center text-md-left"
+          style={{ width: "20%", margin: "auto" }}
+          {...register("location")}
+        >
+          <option selected> المدينه </option>
+          <option value="العدوه"> العدوه </option>
+          <option value="مغاغه"> مغاغه </option>
+          <option value="المنيا"> المنيا </option>
+        </select>
+        <button
+          type="submit"
+          className=" btn btn-outline-danger w-100 w-md-20"
+          style={{ width: "20%", margin: "auto" }}
+        >
+          بحث{" "}
+        </button>
+      </form>
 
       <h2
         className="text-center text-primary my-3"
@@ -131,8 +171,8 @@ export default function CardComponent() {
                     alt="Card image"
                     sx={{
                       objectFit: "cover",
-                      width: "100%", // جعل الصورة تأخذ العرض الكامل
-                      flexShrink: 0, // منع الانكماش
+                      width: "100%", 
+                      flexShrink: 0,  
                     }}
                   />
                   <Button
@@ -143,8 +183,6 @@ export default function CardComponent() {
                     {prop.status === "sell" ? "للبيع" : "للايجار"}
                   </Button>
                   <CardContent sx={{ flexGrow: 1 }}>
-                    {" "}
-                    {/* استخدام flexGrow لتوزيع المساحة */}
                     <Typography
                       variant="h6"
                       sx={{
@@ -231,7 +269,7 @@ export default function CardComponent() {
                       <button
                         className="btn btn-primary"
                         onClick={() => nav(`/${prop._id}`)}
-                        style={{ fontSize: "16px" }}
+                        style={{ fontSize: "16px", width:"120px" }}
                       >
                         عرض التفاصيل{" "}
                       </button>
