@@ -103,29 +103,29 @@ export default function CardComponent() {
       >
         <select
           className="form-select w-100 w-md-20 text-center text-md-left"
-          style={{ width: "20%", margin: "auto" }}
+          style={{ margin: "5px 0" }}
           {...register("status")}
         >
-          <option selected>نوع العقد </option>
-          <option value="rent"> ايجار </option>
-          <option value="sell"> للبيع </option>
+          <option selected>نوع العقد</option>
+          <option value="rent"> ايجار</option>
+          <option value="sell"> للبيع</option>
         </select>
         <select
           className="form-select w-100 w-md-20 text-center text-md-left"
-          style={{ width: "20%", margin: "auto" }}
+          style={{ margin: "5px 0" }}
           {...register("location")}
         >
-          <option selected> المدينه </option>
-          <option value="العدوه"> العدوه </option>
-          <option value="مغاغه"> مغاغه </option>
-          <option value="المنيا"> المنيا </option>
+          <option selected> المدينه</option>
+          <option value="العدوه"> العدوه</option>
+          <option value="مغاغه"> مغاغه</option>
+          <option value="المنيا"> المنيا</option>
         </select>
         <button
           type="submit"
-          className=" btn btn-outline-danger w-100 w-md-20"
-          style={{ width: "20%", margin: "auto" }}
+          className="btn btn-outline-danger w-100 w-md-20"
+          style={{ margin: "5px 0" }}
         >
-          بحث{" "}
+          بحث
         </button>
       </form>
 
@@ -143,7 +143,7 @@ export default function CardComponent() {
       {load ? (
         <LoadingPage />
       ) : (
-        <Grid container spacing={3} justifyContent="center">
+        <Grid container spacing={2} justifyContent="center">
           {all_property.length > 0 ? (
             all_property.map((prop) => (
               <Grid item xs={12} sm={6} md={4} key={prop._id}>
@@ -155,9 +155,9 @@ export default function CardComponent() {
                     overflow: "hidden",
                     cursor: "pointer",
                     transition: "transform 0.3s",
-                    display: "flex", // استخدام flex لجعل المحتوى يتوزع بشكل جيد
-                    flexDirection: "column", // توجيه المحتوى عموديًا
-                    height: "100%", // جعل الكارد يتسع لارتفاع الحاوية
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%", // اجعل ارتفاع البطاقة 100%
                     "&:hover": {
                       transform: "scale(1.03)",
                     },
@@ -182,7 +182,7 @@ export default function CardComponent() {
                   >
                     {prop.status === "sell" ? "للبيع" : "للايجار"}
                   </Button>
-                  <CardContent sx={{ flexGrow: 1 }}>
+                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                     <Typography
                       variant="h6"
                       sx={{
@@ -193,85 +193,53 @@ export default function CardComponent() {
                     >
                       {prop.title}
                     </Typography>
-                    <Table
-                      size="small"
-                      sx={{ width: "100%", tableLayout: "fixed" }}
-                    >
+                    <Table size="small" sx={{ width: "100%", tableLayout: "fixed" }}>
                       <TableBody>
                         <TableRow>
-                          <TableCell
-                            sx={{ borderBottom: "none", textAlign: "center" }}
-                          >
+                          <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
                             الموقع
                           </TableCell>
-                          <TableCell
-                            sx={{ borderBottom: "none", textAlign: "center" }}
-                          >
+                          <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
                             المساحة
                           </TableCell>
-                          {prop.bathrooms != 0 ? (
-                            <TableCell
-                              sx={{ borderBottom: "none", textAlign: "center" }}
-                            >
+                          {prop.bathrooms !== 0 && (
+                            <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
                               عدد الغرف
                             </TableCell>
-                          ) : (
-                            ""
                           )}
-                          {prop.bedrooms != 0 ? (
-                            <TableCell
-                              sx={{ borderBottom: "none", textAlign: "center" }}
-                            >
+                          {prop.bedrooms !== 0 && (
+                            <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
                               عدد الحمامات
                             </TableCell>
-                          ) : (
-                            ""
                           )}
                         </TableRow>
                         <TableRow>
-                          <TableCell
-                            sx={{ borderBottom: "none", textAlign: "center" }}
-                          >
-                            <i className="fa-solid fa-location-dot mx-2"></i>{" "}
-                            {prop.location}
+                          <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
+                            <i className="fa-solid fa-location-dot mx-2"></i> {prop.location}
                           </TableCell>
-                          <TableCell
-                            sx={{ borderBottom: "none", textAlign: "center" }}
-                          >
-                            <i className="fa-solid fa-house mx-2"></i>{" "}
-                            {prop.area} م²
+                          <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
+                            <i className="fa-solid fa-house mx-2"></i> {prop.area} م²
                           </TableCell>
-                          {prop.bedrooms != 0 ? (
-                            <TableCell
-                              sx={{ borderBottom: "none", textAlign: "center" }}
-                            >
-                              <i className="fa-solid fa-bed mx-2"></i>{" "}
-                              {prop.bedrooms}
+                          {prop.bedrooms !== 0 && (
+                            <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
+                              <i className="fa-solid fa-bed mx-2"></i> {prop.bedrooms}
                             </TableCell>
-                          ) : (
-                            ""
                           )}
-
-                          {prop.bathrooms != 0 ? (
-                            <TableCell
-                              sx={{ borderBottom: "none", textAlign: "center" }}
-                            >
-                              <i className="fa-solid fa-bath mx-2"></i>{" "}
-                              {prop.bathrooms}
+                          {prop.bathrooms !== 0 && (
+                            <TableCell sx={{ borderBottom: "none", textAlign: "center" }}>
+                              <i className="fa-solid fa-bath mx-2"></i> {prop.bathrooms}
                             </TableCell>
-                          ) : (
-                            ""
                           )}
                         </TableRow>
                       </TableBody>
                     </Table>
-                    <Box className="d-flex justify-content-between align-content-center mt-3 ">
+                    <Box className="d-flex justify-content-between align-content-center mt-auto">
                       <button
                         className="btn btn-primary"
                         onClick={() => nav(`/${prop._id}`)}
-                        style={{ fontSize: "16px"  }}
+                        style={{ fontSize: "16px" }}
                       >
-                        عرض التفاصيل{" "}
+                        عرض التفاصيل
                       </button>
                       <Typography
                         variant="h5"

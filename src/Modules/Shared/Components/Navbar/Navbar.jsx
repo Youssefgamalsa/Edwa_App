@@ -43,15 +43,11 @@ function Navbar() {
         backgroundColor: "white",
         color: "#000",
         boxShadow: "none",
-        position: "fixed",
-        top: "0",
-        right: "0",
-        zIndex: "1000",
+        zIndex: 1000,
       }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo */}
           <Typography
             variant="h6"
             noWrap
@@ -60,7 +56,6 @@ function Navbar() {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -74,7 +69,7 @@ function Navbar() {
               <MenuIcon />
             </IconButton>
             <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-              <Box sx={{ width: 250 }}>
+              <Box sx={{ width: { xs: "80vw", sm: "250px" } }}>
                 <Typography variant="h6" sx={{ padding: 2 }}>
                   القائمة
                 </Typography>
@@ -172,7 +167,7 @@ function Navbar() {
                       "&:hover": { borderColor: "#0056b3", color: "#0056b3" },
                     }}
                   >
-                    تسجيل حساب
+                    انشاء حساب
                   </Button>
                 </Box>
               ) : (

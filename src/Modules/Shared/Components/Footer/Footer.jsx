@@ -1,4 +1,3 @@
-// import React from 'react';
 import { useNavigate } from "react-router-dom";
 import logo from "../../../../assets/img/logon.png";
 import {
@@ -62,7 +61,7 @@ export default function Footer() {
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
       >
         <a className="" href="/">
-          <img src={logo} width={"500px"} />
+          <img src={logo} width={"100px"} />
         </a>
       </div>
     </MDBFooter>
