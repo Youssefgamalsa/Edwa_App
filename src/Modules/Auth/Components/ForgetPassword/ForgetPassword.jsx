@@ -1,10 +1,12 @@
 // import React from 'react';
 import img from "../../../../assets/img/image.jpg";
-import AuthComponent from '../../../Usable/Component/AuthComponent/AuthComponent';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import { USERS_URL } from '../../../../Api/Api';
+import AuthComponent from "../../../Usable/Component/AuthComponent/AuthComponent";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
+// import { USERS_URL } from '../../../../Api/Api';
 // import { Link } from 'react-router-dom';
 
 export default function ForgetPassword() {
@@ -13,12 +15,17 @@ export default function ForgetPassword() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const nav = useNavigate();
 
   // Submit handler
   const submit = async (data) => {
     try {
-      const res = await axios.post(USERS_URL.forgetPassword, data);
-      toast.success("Password reset email sent successfully");
+      const res = await axios.get(
+        `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/auth/forgetpassword/${data.email}`
+      );
+      toast.success("Your OTP Is Sent To Your Email");
+      nav("/auth/reset-password");
+      console.log(res);
     } catch (error) {
       console.error(error);
       toast.error("Failed to send password reset email");
@@ -39,26 +46,35 @@ export default function ForgetPassword() {
                   <div className="form-floating mb-3">
                     <input
                       type="email"
-                      className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.email ? "is-invalid" : ""
+                      }`}
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
-                          value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                          value:
+                            /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                           message: "Invalid email format",
                         },
                       })}
                       id="email"
                       placeholder="name@example.com"
                     />
-                    <label htmlFor="email" className="form-label">Email</label>
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
                     {errors.email && (
-                      <div className="invalid-feedback">{errors.email.message}</div>
+                      <div className="invalid-feedback">
+                        {errors.email.message}
+                      </div>
                     )}
                   </div>
                 </div>
                 <div className="col-12">
                   <div className="d-grid">
-                    <button className="btn btn-dark btn-lg" type="submit">Reset Password</button>
+                    <button className="btn btn-dark btn-lg" type="submit">
+                      Forget Password
+                    </button>
                   </div>
                 </div>
               </div>
@@ -69,7 +85,5 @@ export default function ForgetPassword() {
     );
   };
 
-  return (
-    <AuthComponent form={form()} img={img} />
-  );
+  return <AuthComponent form={form()} img={img} />;
 }

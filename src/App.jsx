@@ -14,6 +14,7 @@ import ChangePassword from "./Modules/Auth/Components/ChangePassword/ChangePasow
 import Verify from "./Modules/Auth/Components/Verify/Verify";
 import ShowAqar from "./Modules/ShowAqar/ShowAqar";
 import Profile from "./Modules/Profile/Components/Profile";
+import ResetPassword from "./Modules/Auth/Components/ResetPassword/ResetPassword";
 
 function App() {
   const routes = createBrowserRouter([
@@ -37,7 +38,7 @@ function App() {
         { path: "register", element: <Register /> },
         { path: "forget-password", element: <ForgetPassword /> },
         { path: "change-password", element: <ChangePassword /> },
-        // {path:"reset-password",element:<ResetPassword/>},
+        {path:"reset-password",element:<ResetPassword/>},
         { path: "verify", element: <Verify /> },
       ],
     },

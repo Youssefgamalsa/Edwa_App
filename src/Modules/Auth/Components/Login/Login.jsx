@@ -126,13 +126,16 @@ export default function Login() {
                 <div className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-5">
                   <a
                     href="/auth/register"
-                    className="link-secondary text-decoration-none"
+                    className=" text-decoration-none"
+                    style={{fontSize:'21px' }}
+
                   >
                     Create new account
                   </a>
                   <a
                     href="/auth/forget-password"
-                    className="link-secondary text-decoration-none"
+                    className=" text-decoration-none"
+                    style={{fontSize:'21px'}}
                   >
                     Forgot password
                   </a>
