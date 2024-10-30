@@ -72,12 +72,12 @@ export default function ShowAqar() {
   };
 
   // دالة handleOpenModal جديدة
-  const handleOpenModal = () => {
-    setShow(true);
-  };
-  // const handleOpenModal = (data) => {
+  // const handleOpenModal = () => {
   //   setShow(true);
   // };
+  const handleOpenModal = (data) => {
+    setShow(true);
+  };
 
   return (
     <>
