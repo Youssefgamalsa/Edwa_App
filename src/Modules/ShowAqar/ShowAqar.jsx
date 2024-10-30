@@ -131,7 +131,7 @@ export default function ShowAqar() {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="contained" color="primary" onClick={handleSubmit(handleAgree)}>
+          <Button variant="contained" color="primary" onClick={handleSubmit(handleAgree)} className="mx-2">
             أوافق
           </Button>
           <Button variant="outlined" color="secondary" onClick={handleDisagree}>

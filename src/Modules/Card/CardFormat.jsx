@@ -156,7 +156,7 @@ export default function CardFormat() {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell align="right">{prop.description}</TableCell>
+                    <TableCell align="right" style={{fontSize:"20px"}}>{prop.description}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

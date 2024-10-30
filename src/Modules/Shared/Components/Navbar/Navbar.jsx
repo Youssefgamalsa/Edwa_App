@@ -45,10 +45,10 @@ function Navbar() {
     <AppBar
       // position="static"
       sx={{
-        position:"fixed",
-        top:0,
-        right:0,
-        left:0,
+        position: "fixed",
+        top: 0,
+        right: 0,
+        left: 0,
         direction: "rtl",
         backgroundColor: "white",
         color: "#000",
@@ -72,7 +72,6 @@ function Navbar() {
           >
             <img src={logo} alt="" width={"100px"} />
           </Typography>
-
           {/* Drawer for small screens */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton onClick={toggleDrawer(true)} color="inherit">

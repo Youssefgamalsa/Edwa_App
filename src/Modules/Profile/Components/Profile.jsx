@@ -10,6 +10,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import img from '../../../assets/img/10.png'
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
@@ -124,7 +125,7 @@ export default function Profile() {
                 >
                   <CardMedia
                     component="img"
-                    image={post?.images[0]?.url}
+                    image={post?.images[0]?.url || img }
                     alt="Card image cap"
                     onClick={() => navigate(`/${post._id}`)}
                     sx={{
