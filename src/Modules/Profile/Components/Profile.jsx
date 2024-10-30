@@ -114,7 +114,7 @@ export default function Profile() {
         <Grid container spacing={3}>
           {posts.map((post) => (
             <>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} key={post._id}>
                 <Card
                   sx={{
                     position: "relative",
@@ -124,7 +124,7 @@ export default function Profile() {
                 >
                   <CardMedia
                     component="img"
-                    image={post.images[0].url}
+                    image={post?.images[0]?.url}
                     alt="Card image cap"
                     onClick={() => navigate(`/${post._id}`)}
                     sx={{

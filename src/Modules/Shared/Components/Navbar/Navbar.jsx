@@ -13,11 +13,17 @@ import { Link } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import logo from "../../../../assets/img/logon.png";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const pages = [{ name: "اعلن عن عقارك", link: "/showdata" }];
 
 function Navbar() {
+  const user = React.useContext(AuthContext);
+  console.log(user);
+  const id = user?.userData?.id;
+  // const role = user?.userData?.role;
+
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
@@ -68,15 +74,32 @@ function Navbar() {
             <IconButton onClick={toggleDrawer(true)} color="inherit">
               <MenuIcon />
             </IconButton>
-            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+            <Drawer
+              anchor="right"
+              open={drawerOpen}
+              onClose={toggleDrawer(false)}
+            >
               <Box sx={{ width: { xs: "80vw", sm: "250px" } }}>
                 <Typography variant="h6" sx={{ padding: 2 }}>
                   القائمة
                 </Typography>
                 <Divider />
                 {pages.map((page) => (
-                  <MenuItem key={page.name} component={Link} to={page.link} sx={{ justifyContent: "center" }}>
-                    <Typography sx={{ color: "#007bff", fontWeight: "bold", fontSize: "20px" }}>{page.name}</Typography>
+                  <MenuItem
+                    key={page.name}
+                    component={Link}
+                    to={page.link}
+                    sx={{ justifyContent: "center" }}
+                  >
+                    <Typography
+                      sx={{
+                        color: "#007bff",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {page.name}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Box>
@@ -135,7 +158,10 @@ function Navbar() {
                   <Typography variant="h6" sx={{ textAlign: "center", mb: 1 }}>
                     تسجيل الدخول
                   </Typography>
-                  <Typography variant="body2" sx={{ textAlign: "center", mb: 2, color: "gray" }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ textAlign: "center", mb: 2, color: "gray" }}
+                  >
                     اضف اعلانات، ملاحظات، المفضلات وأكثر...
                   </Typography>
                   <Button
@@ -172,7 +198,11 @@ function Navbar() {
                 </Box>
               ) : (
                 <Box>
-                  <MenuItem component={Link} to="/profile" sx={{ justifyContent: "center" }}>
+                  <MenuItem
+                    component={Link}
+                    to={`/profile/${id}`}
+                    sx={{ justifyContent: "center" }}
+                  >
                     <Typography variant="body1">الملف الشخصي</Typography>
                   </MenuItem>
                   <Divider sx={{ my: 1 }} />

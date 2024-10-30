@@ -12,7 +12,7 @@ import {
   Box,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-import img from "../../../../assets/img/image.jpg"; // يمكنك استخدام الصورة الخاصة بك هنا
+// import img from "../../../../assets/img/image.jpg"; // يمكنك استخدام الصورة الخاصة بك هنا
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -31,7 +31,7 @@ export default function CardComponent() {
   const [load, setLoad] = useState(true);
   const images = [img10, img11, img12];
 
-  const get_all_properity = async (pages, status, location) => {
+  const get_all_properity = async (pages) => {
     setLoad(true);
     try {
       let response = await axios.get(
@@ -39,8 +39,6 @@ export default function CardComponent() {
         {
           params: {
             page: pages,
-            status: status,
-            location: location,
           },
         }
       );
@@ -54,7 +52,7 @@ export default function CardComponent() {
   };
 
   useEffect(() => {
-    get_all_properity(1, "sell");
+    get_all_properity(1);
     window.scrollTo(0, 20);
   }, []);
 
@@ -128,7 +126,7 @@ export default function CardComponent() {
                   <CardMedia
                     component="img"
                     height="200"
-                    image={prop.images[0]?.url || img}
+                    image={prop.images[0]?.url || img10}
                     alt="Card image"
                     sx={{
                       objectFit: "cover",

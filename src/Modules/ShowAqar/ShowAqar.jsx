@@ -24,21 +24,6 @@ export default function ShowAqar() {
     window.scrollTo(0, 20);
   }, [token, nav]);
 
-  // const append_to_form_data = (data) => {
-  //   let formData = new FormData();
-  //   formData.append("title", data.title);
-  //   formData.append("location", data.location);
-  //   formData.append("price", data.price);
-  //   formData.append("area", data.area);
-  //   formData.append("bedrooms", data.bedrooms);
-  //   formData.append("bathrooms", data.bathrooms);
-  //   formData.append("type", "partment");
-  //   formData.append("images", data.images);
-  //   formData.append("status", data.status);
-  // };
-
-  // إرسال البيانات إلى الخادم
-
   const append_to_form_data = (data) => {
     let formData = new FormData();
     formData.append("title", data.title);
@@ -212,7 +197,7 @@ export default function ShowAqar() {
           {/* رفع الصورة */}
           <Box mb={4} sx={{ position: "relative" }}>
             <Typography variant="h6" color="error" mb={2}>
-              إضافة صور رئيسية للعقار
+              إضافة صور رئيسية للعقار ( اختيارى )
             </Typography>
             <Box
               sx={{
@@ -226,12 +211,12 @@ export default function ShowAqar() {
               }}
             >
               <Typography variant="h5" color="primary">
-                رفع صور العقار
+                رفع صور العقار ( اختيارى )
               </Typography>
               <input
                 type="file"
                 multiple
-                {...register("images", { required: "الصور مطلوبة" })}
+                {...register("images")}
                 style={{
                   opacity: 0,
                   position: "absolute",
@@ -243,6 +228,27 @@ export default function ShowAqar() {
                 }}
               />
             </Box>
+          </Box>
+          <Typography variant="h6" mb={2} color="error">
+            سياسات الموقع
+          </Typography>
+          <Box
+            sx={{
+              padding: "10px",
+              border: "2px dashed rgba(0, 128, 0, 0.5)",
+              bgcolor: "rgba(240, 255, 239, 1)",
+              borderRadius: "5px",
+              textAlign: "center",
+              cursor: "pointer",
+              position: "relative",
+              margin: "20px 0px",
+            }}
+          >
+            <Typography variant="h6" mb={2} color="primary">
+              يرجى العلم ان عرض العقارات على موقعنا بشكل مجانى بالكامل  ويتكفل الموقع تكاليف العرض عن العقار فى وساءل التواصل الاجتماعى المختلفه وعرض الاعلانات عنه وفى حاله
+              جلب الموقع مشترى للعقار فان الموقع يحصل على نسبه 1% من ثمن العقار
+              للمستخدم و .5% من من ثمن العقار للمشترى
+            </Typography>
           </Box>
           <Box display="flex" justifyContent="center" gap={2}>
             <Button
