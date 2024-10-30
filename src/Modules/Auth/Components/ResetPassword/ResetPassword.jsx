@@ -42,7 +42,7 @@ export default function ResetPassword() {
         <div className="col-12 col-lg-11 col-xl-10">
           <div className="card-body p-3 p-md-4 p-xl-5">
             <div className="text-center mb-4">
-              <h4 className="text-start">Forget Password</h4>
+              <h4 className="text-start">Reset Password</h4>
             </div>
             <form onSubmit={handleSubmit(submit)}>
               <div className="row gy-3">

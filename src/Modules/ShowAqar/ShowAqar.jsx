@@ -1,13 +1,12 @@
 import { Button, TextField, Typography, Box } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
-// import axios from "axios";
-// import { ADDMODULE_URL } from "../../Api/Api"; // افترض وجود رابط API صحيح
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
+
 export default function ShowAqar() {
   const [show, setShow] = useState(false);
   const {
@@ -43,18 +42,16 @@ export default function ShowAqar() {
     formData.append("bedrooms", data.bedrooms);
     formData.append("bathrooms", data.bathrooms);
     formData.append("type", "partment");
-    formData.append("status", data.status); // تأكد من إضافة status
-    formData.append("description", data.description); // تأكد من إضافة description
+    formData.append("status", data.status); 
+    formData.append("description", data.description); 
     for (let i = 0; i < data.images.length; i++) {
-      formData.append("images", data.images[i]); // تأكد من إضافة الصور كـ FormData
+      formData.append("images", data.images[i]);
     }
-    return formData; // تأكد من إرجاع formData
+    return formData; 
   };
 
   const submit = async (data) => {
-    console.log(data);
     const form_data = append_to_form_data(data);
-    // console.log(form_data);
     try {
       const response = await axios.post(
         "https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property",
@@ -65,15 +62,22 @@ export default function ShowAqar() {
           },
         }
       );
-      console.log(token);
       nav("/");
-      console.log("Response:", response);
+      console.log(response)
       toast.success("Real State Created Successfully ");
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("failed Created");
+      console.log(error)
+      toast.error("Failed to Create");
     }
   };
+
+  // دالة handleOpenModal جديدة
+  const handleOpenModal = () => {
+    setShow(true);
+  };
+  // const handleOpenModal = (data) => {
+  //   setShow(true);
+  // };
 
   return (
     <>
@@ -81,64 +85,61 @@ export default function ShowAqar() {
         اضافة العقار
       </Typography>
       <Modal
-      show={show}
-      onHide={() => setShow(false)}
-      dialogClassName="modal-90w"
-      aria-labelledby="custom-modal-title"
-      style={{ direction: "rtl" }}
-    >
-      <Modal.Header closeButton style={{ justifyContent: "space-between" }}>
-        <Modal.Title
-          id="custom-modal-title"
-          style={{
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: "1.8rem",
-            color: "#007bff",
-            flex: 1,
-          }}
-        >
-          سياسات الموقع
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body style={{ fontSize: "1.1rem", lineHeight: "1.6", color: "#333" }}>
-        <p style={{ marginBottom: "1rem", textAlign: "justify" }}>
-          في موقعنا، نسعى جاهدين لتقديم خدمة متميزة للبائعين والمستأجرين، مع الحرص على تبسيط وشفافية العمليات. للاستمرار في تقديم خدمات عالية الجودة، نقوم بتطبيق عمولة بسيطة على كل عملية بيع أو تأجير.
-        </p>
-        <div style={{ padding: "1rem", backgroundColor: "#f8f9fa", borderRadius: "8px", border: "1px solid #e9ecef" }}>
-          <p style={{ margin: "0 0 0.5rem 0", fontWeight: "bold", color: "#28a745" }}>
-            <span role="img" aria-label="check">✅</span> في حالة البيع:
+        show={show}
+        onHide={() => setShow(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="custom-modal-title"
+        style={{ direction: "rtl" }}
+      >
+        <Modal.Header closeButton style={{ justifyContent: "space-between" }}>
+          <Modal.Title
+            id="custom-modal-title"
+            style={{
+              textAlign: "center",
+              fontWeight: "bold",
+              fontSize: "1.8rem",
+              color: "#007bff",
+              flex: 1,
+            }}
+          >
+            سياسات الموقع
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ fontSize: "1.1rem", lineHeight: "1.6", color: "#333" }}>
+          <p style={{ marginBottom: "1rem", textAlign: "justify" }}>
+            في موقعنا، نسعى جاهدين لتقديم خدمة متميزة للبائعين والمستأجرين، مع الحرص على تبسيط وشفافية العمليات. للاستمرار في تقديم خدمات عالية الجودة، نقوم بتطبيق عمولة بسيطة على كل عملية بيع أو تأجير.
           </p>
-          <p style={{ marginRight: "1.5rem" }}>
-            تُطبق عمولة بنسبة <strong>1%</strong> من سعر البيع النهائي، تُخصم من البائع.
+          <div style={{ padding: "1rem", backgroundColor: "#f8f9fa", borderRadius: "8px", border: "1px solid #e9ecef" }}>
+            <p style={{ margin: "0 0 0.5rem 0", fontWeight: "bold", color: "#28a745" }}>
+              <span role="img" aria-label="check">✅</span> في حالة البيع:
+            </p>
+            <p style={{ marginRight: "1.5rem" }}>
+              تُطبق عمولة بنسبة <strong>1%</strong> من سعر البيع النهائي، تُخصم من البائع.
+            </p>
+            <p style={{ margin: "0.5rem 0", fontWeight: "bold", color: "#17a2b8" }}>
+              <span role="img" aria-label="check">✅</span> في حالة التأجير:
+            </p>
+            <p style={{ marginRight: "1.5rem" }}>
+              تُطبق عمولة بنسبة <strong>25%</strong> من إيجار الشهر الأول، تُخصم من المؤجر.
+            </p>
+          </div>
+          <p style={{ marginTop: "1rem", textAlign: "justify" }}>
+            هذه العمولات تتيح لكم الاستفادة من مميزات موقعنا بما في ذلك الوصول إلى شبكة واسعة من العملاء، وأدوات تسويقية متقدمة، ودعم متواصل لضمان تجربة مريحة وسلسة.
           </p>
-          <p style={{ margin: "0.5rem 0", fontWeight: "bold", color: "#17a2b8" }}>
-            <span role="img" aria-label="check">✅</span> في حالة التأجير:
+          <p style={{ marginTop: "1rem", fontWeight: "bold", textAlign: "center", color: "#007bff" }}>
+            شكرًا لاختياركم [عقاري منيا]!
           </p>
-          <p style={{ marginRight: "1.5rem" }}>
-            تُطبق عمولة بنسبة <strong>25%</strong> من إيجار الشهر الأول، تُخصم من المؤجر.
-          </p>
-        </div>
-        <p style={{ marginTop: "1rem", textAlign: "justify" }}>
-          هذه العمولات تتيح لكم الاستفادة من مميزات موقعنا بما في ذلك الوصول إلى شبكة واسعة من العملاء، وأدوات تسويقية متقدمة، ودعم متواصل لضمان تجربة مريحة وسلسة.
-        </p>
-        <p style={{ marginTop: "1rem", fontWeight: "bold", textAlign: "center", color: "#007bff" }}>
-          شكرًا لاختياركم [عقاري منيا]!
-        </p>
-      </Modal.Body>
-      <Modal.Footer>
-      <Button variant="contained" color="primary" onClick={handleSubmit(handleAgree)}>
-        أوافق
-      </Button>
-      <Button variant="outlined" color="secondary" onClick={handleDisagree}>
-        لا أوافق
-      </Button>
-    </Modal.Footer>
-    </Modal>
-    
-    
-    
-    
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="contained" color="primary" onClick={handleSubmit(handleAgree)}>
+            أوافق
+          </Button>
+          <Button variant="outlined" color="secondary" onClick={handleDisagree}>
+            لا أوافق
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Box
         sx={{
           width: "100%",
@@ -151,13 +152,13 @@ export default function ShowAqar() {
       >
         <form
           className="shadow col-lg-9 m-auto p-4 col-md-12"
-          onSubmit={(e) => { e.preventDefault(); setShow(true); }}
+          onSubmit={handleSubmit(handleOpenModal)} // استخدام handleSubmit مع الدالة الجديدة
         >
           <select
             className="form-select w-100 w-md-20 text-center text-md-left"
             style={{ width: "20%", margin: "20px auto" }}
             {...register("status")}
-            defaultValue="" // استخدام defaultValue لتحديد القيمة الافتراضية
+            defaultValue=""
           >
             <option value="" disabled>
               نوع العقد
@@ -234,7 +235,7 @@ export default function ShowAqar() {
               helperText={errors.bedrooms ? errors.bedrooms.message : ""}
               sx={{ bgcolor: "#f0f4ff", width: "100%" }}
             />
-          </Box>{" "}
+          </Box>
           <Box display="flex" justifyContent="space-between" mb={3}>
             <TextField
               id="bathrooms"
@@ -302,7 +303,6 @@ export default function ShowAqar() {
             <Button
               variant="outlined"
               color="primary"
-              onClick={() => setShow(true)}
               sx={{ padding: "10px 20px", borderRadius: "5px" }}
               type="submit"
             >
@@ -311,7 +311,6 @@ export default function ShowAqar() {
             <Button
               variant="contained"
               color="error"
-              // endIcon={<CloseIcon />}
               sx={{ padding: "10px 20px", borderRadius: "5px" }}
             >
               إغلاق

@@ -127,7 +127,7 @@ export default function Login() {
                   <a
                     href="/auth/register"
                     className=" text-decoration-none"
-                    style={{fontSize:'21px' }}
+                    style={{fontSize:'21px',color:"#000" }}
 
                   >
                     Create new account
@@ -135,9 +135,9 @@ export default function Login() {
                   <a
                     href="/auth/forget-password"
                     className=" text-decoration-none"
-                    style={{fontSize:'21px'}}
+                    style={{fontSize:'21px',color:"#000"}}
                   >
-                    Forgot password
+                    Forget password
                   </a>
                 </div>
               </div>
