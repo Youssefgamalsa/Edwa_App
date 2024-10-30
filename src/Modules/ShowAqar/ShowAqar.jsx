@@ -1,13 +1,15 @@
 import { Button, TextField, Typography, Box } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useState } from 'react';
 // import axios from "axios";
 // import { ADDMODULE_URL } from "../../Api/Api"; // افترض وجود رابط API صحيح
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-
+import Modal from 'react-bootstrap/Modal';
 export default function ShowAqar() {
+  const [show, setShow] = useState(false);
   const {
     register,
     handleSubmit,
@@ -15,6 +17,14 @@ export default function ShowAqar() {
   } = useForm();
 
   const nav = useNavigate();
+  const handleAgree = (data) => {
+    setShow(false);
+    submit(data);
+  };
+
+  const handleDisagree = () => {
+    setShow(false);
+  };
 
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -70,6 +80,65 @@ export default function ShowAqar() {
       <Typography variant="h4" textAlign="center" mb={3}>
         اضافة العقار
       </Typography>
+      <Modal
+      show={show}
+      onHide={() => setShow(false)}
+      dialogClassName="modal-90w"
+      aria-labelledby="custom-modal-title"
+      style={{ direction: "rtl" }}
+    >
+      <Modal.Header closeButton style={{ justifyContent: "space-between" }}>
+        <Modal.Title
+          id="custom-modal-title"
+          style={{
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: "1.8rem",
+            color: "#007bff",
+            flex: 1,
+          }}
+        >
+          سياسات الموقع
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{ fontSize: "1.1rem", lineHeight: "1.6", color: "#333" }}>
+        <p style={{ marginBottom: "1rem", textAlign: "justify" }}>
+          في موقعنا، نسعى جاهدين لتقديم خدمة متميزة للبائعين والمستأجرين، مع الحرص على تبسيط وشفافية العمليات. للاستمرار في تقديم خدمات عالية الجودة، نقوم بتطبيق عمولة بسيطة على كل عملية بيع أو تأجير.
+        </p>
+        <div style={{ padding: "1rem", backgroundColor: "#f8f9fa", borderRadius: "8px", border: "1px solid #e9ecef" }}>
+          <p style={{ margin: "0 0 0.5rem 0", fontWeight: "bold", color: "#28a745" }}>
+            <span role="img" aria-label="check">✅</span> في حالة البيع:
+          </p>
+          <p style={{ marginRight: "1.5rem" }}>
+            تُطبق عمولة بنسبة <strong>1%</strong> من سعر البيع النهائي، تُخصم من البائع.
+          </p>
+          <p style={{ margin: "0.5rem 0", fontWeight: "bold", color: "#17a2b8" }}>
+            <span role="img" aria-label="check">✅</span> في حالة التأجير:
+          </p>
+          <p style={{ marginRight: "1.5rem" }}>
+            تُطبق عمولة بنسبة <strong>25%</strong> من إيجار الشهر الأول، تُخصم من المؤجر.
+          </p>
+        </div>
+        <p style={{ marginTop: "1rem", textAlign: "justify" }}>
+          هذه العمولات تتيح لكم الاستفادة من مميزات موقعنا بما في ذلك الوصول إلى شبكة واسعة من العملاء، وأدوات تسويقية متقدمة، ودعم متواصل لضمان تجربة مريحة وسلسة.
+        </p>
+        <p style={{ marginTop: "1rem", fontWeight: "bold", textAlign: "center", color: "#007bff" }}>
+          شكرًا لاختياركم [عقاري منيا]!
+        </p>
+      </Modal.Body>
+      <Modal.Footer>
+      <Button variant="contained" color="primary" onClick={handleSubmit(handleAgree)}>
+        أوافق
+      </Button>
+      <Button variant="outlined" color="secondary" onClick={handleDisagree}>
+        لا أوافق
+      </Button>
+    </Modal.Footer>
+    </Modal>
+    
+    
+    
+    
       <Box
         sx={{
           width: "100%",
@@ -82,7 +151,7 @@ export default function ShowAqar() {
       >
         <form
           className="shadow col-lg-9 m-auto p-4 col-md-12"
-          onSubmit={handleSubmit(submit)}
+          onSubmit={(e) => { e.preventDefault(); setShow(true); }}
         >
           <select
             className="form-select w-100 w-md-20 text-center text-md-left"
@@ -229,32 +298,11 @@ export default function ShowAqar() {
               />
             </Box>
           </Box>
-          <Typography variant="h6" mb={2} color="error">
-            سياسات الموقع
-          </Typography>
-          <Box
-            sx={{
-              padding: "10px",
-              border: "2px dashed rgba(0, 128, 0, 0.5)",
-              bgcolor: "rgba(240, 255, 239, 1)",
-              borderRadius: "5px",
-              textAlign: "center",
-              cursor: "pointer",
-              position: "relative",
-              margin: "20px 0px",
-            }}
-          >
-            <Typography variant="h6" mb={2} color="primary">
-              يرجى العلم ان عرض العقارات على موقعنا بشكل مجانى بالكامل  ويتكفل الموقع تكاليف العرض عن العقار فى وساءل التواصل الاجتماعى المختلفه وعرض الاعلانات عنه وفى حاله
-              جلب الموقع مشترى للعقار فان الموقع يحصل على نسبه 1% من ثمن العقار
-              للمستخدم و .5% من من ثمن العقار للمشترى
-            </Typography>
-          </Box>
           <Box display="flex" justifyContent="center" gap={2}>
             <Button
               variant="outlined"
               color="primary"
-              // endIcon={<CreateIcon />}
+              onClick={() => setShow(true)}
               sx={{ padding: "10px 20px", borderRadius: "5px" }}
               type="submit"
             >

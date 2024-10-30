@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
-import logo from "../../../../assets/img/logon.png";
+import logo from "../../../../assets/img/logon1.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AuthContext } from "../../../../context/AuthContext";
 

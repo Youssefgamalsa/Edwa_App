@@ -1,11 +1,11 @@
-import React from 'react';
+// import React from 'react';
 import img from "../../../../assets/img/image.jpg";
 import AuthComponent from '../../../Usable/Component/AuthComponent/AuthComponent';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { USERS_URL } from '../../../../Api/Api';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export default function ForgetPassword() {
   const {
