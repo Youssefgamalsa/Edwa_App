@@ -54,7 +54,7 @@ export default function ShowAqar() {
     const form_data = append_to_form_data(data);
     try {
       const response = await axios.post(
-        "https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property",
+        "https://api.aqaryminya.com/api/property",
         form_data,
         {
           headers: {
@@ -70,11 +70,6 @@ export default function ShowAqar() {
       toast.error("Failed to Create");
     }
   };
-
-  // دالة handleOpenModal جديدة
-  // const handleOpenModal = () => {
-  //   setShow(true);
-  // };
   const handleOpenModal = (data) => {
     setShow(true);
   };
@@ -139,7 +134,6 @@ export default function ShowAqar() {
           </Button>
         </Modal.Footer>
       </Modal>
-
       <Box
         sx={{
           width: "100%",

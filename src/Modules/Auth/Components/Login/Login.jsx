@@ -20,7 +20,7 @@ export default function Login() {
   const submit = async (data) => {
     console.log(data) ; 
     try {
-      const res = await axios.post("https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/auth/signin", data);
+      const res = await axios.post("https://api.aqaryminya.com/api/auth/signin", data);
       const token = res.data.token;
       console.log(res.data.token);
       localStorage.setItem("token", token);

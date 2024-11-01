@@ -21,7 +21,7 @@ export default function ResetPassword() {
     console.log(data);
     try {
       const res = await axios.post(
-        `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/auth/forgetpassword/${data.email}`,
+        `https://api.aqaryminya.com/api/auth/forgetpassword/${data.email}`,
         {
           otp: data.otp,
           newpassword: data.newpassword,

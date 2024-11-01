@@ -21,7 +21,7 @@ export default function ForgetPassword() {
   const submit = async (data) => {
     try {
       const res = await axios.get(
-        `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/auth/forgetpassword/${data.email}`
+        `https://api.aqaryminya.com/api/auth/forgetpassword/${data.email}`
       );
       toast.success("Your OTP Is Sent To Your Email");
       nav("/auth/reset-password");

@@ -1,4 +1,4 @@
-export const BASE_URL="https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api";
+export const BASE_URL="https://api.aqaryminya.com/api";
 export const BASE_USERS=`${BASE_URL}/auth`
 export const USERS_URL={
     register:`${BASE_USERS}/signup`,

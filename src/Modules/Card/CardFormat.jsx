@@ -1,4 +1,5 @@
 import img from "../../../src/assets/img/user-placeholder.png";
+import img1 from "../../../src/assets/img/10.png";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
@@ -31,7 +32,7 @@ export default function CardFormat() {
   const getproperty = async () => {
     try {
       let response = await axios.get(
-        `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property/${id}`
+        `https://api.aqaryminya.com/api/property/${id}`
       );
 
       setProp(response.data.property);
@@ -44,6 +45,7 @@ export default function CardFormat() {
       console.log(error);
     }
   };
+  const whats = `https://aqaryminya.com/${id}`;
 
   const nav = useNavigate();
 
@@ -75,20 +77,33 @@ export default function CardFormat() {
             controls={true}
             indicators={true}
           >
-            {images.map((imag, index) => (
-              <Carousel.Item key={index}>
-                <img
-                  className="d-block w-100"
-                  src={imag.url}
-                  alt={`Slide ${index + 1}`}
-                  style={{
-                    height: "350px",
-                    objectFit: "cover",
-                    borderRadius: "10px",
-                  }}
-                />
-              </Carousel.Item>
-            ))}
+            {images > 0 ? (
+              images.map((imag, index) => (
+                <Carousel.Item key={index}>
+                  <img
+                    className="d-block w-100"
+                    src={imag.url}
+                    alt={`Slide ${index + 1}`}
+                    style={{
+                      height: "350px",
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                    }}
+                  />
+                </Carousel.Item>
+              ))
+            ) : (
+              <img
+                className="d-block w-100"
+                src={img1}
+                alt={`الصوره لا تمس الواقع`}
+                style={{
+                  height: "350px",
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                }}
+              />
+            )}
           </Carousel>
         </Box>
 
@@ -106,6 +121,7 @@ export default function CardFormat() {
             <Typography variant="h4" sx={{ my: "10px" }}>
               {prop.title}
             </Typography>
+
             <Typography variant="h5" sx={{ mb: "10px" }}>
               <PlaceIcon /> {prop.location}
             </Typography>
@@ -156,7 +172,9 @@ export default function CardFormat() {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell align="right" style={{fontSize:"20px"}}>{prop.description}</TableCell>
+                    <TableCell align="right" style={{ fontSize: "20px" }}>
+                      {prop.description}
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -211,7 +229,7 @@ export default function CardFormat() {
                   </Button>
                   <a
                     className="w-100 mb-3 btn btn-success"
-                    href={`https://wa.me/201125683265/?text=اريد ان اعرف معلومات اكثر عن العقار `}
+                    href={`https://wa.me/201125683265/?text=اريد ان اعرف معلومات اكثر عن العقار ${whats}`}
                   >
                     تواصل مع واتساب <WhatsApp />
                   </a>

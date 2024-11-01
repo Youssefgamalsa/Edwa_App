@@ -4,7 +4,7 @@ import AuthComponent from '../../../Usable/Component/AuthComponent/AuthComponent
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { USERS_URL } from '../../../../Api/Api';
+// import { USERS_URL } from '../../../../Api/Api';
 import { useNavigate } from 'react-router-dom';
 
 export default function Verify() {
@@ -18,7 +18,7 @@ export default function Verify() {
   // Submit handler
   const submit = async (data) => {
     try {
-      const res = await axios.post(USERS_URL.verfiy, data);
+      const res = await axios.post("https://api.aqaryminya.com/api/auth/verfiy", data);
       toast.success("verfiy successfully");
       nav('/');
       console.log(res);

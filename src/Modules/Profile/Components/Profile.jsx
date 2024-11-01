@@ -10,7 +10,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import img from '../../../assets/img/10.png'
+import img from "../../../assets/img/10.png";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
@@ -55,7 +55,7 @@ export default function Profile() {
 
   const delete_Prop = async (id) => {
     let response = await axios.delete(
-      `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/property/${id}`,
+      `https://api.aqaryminya.com/api/property/${id}`,
       {
         headers: {
           token: token,
@@ -69,7 +69,7 @@ export default function Profile() {
     setLoad(true);
     try {
       let response = await axios.get(
-        `https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/user/${id}`
+        `https://api.aqaryminya.com/api/user/${id}`
       );
       console.log(response);
       setPosts(response.data.user.posts);
@@ -125,7 +125,7 @@ export default function Profile() {
                 >
                   <CardMedia
                     component="img"
-                    image={post?.images[0]?.url || img }
+                    image={post?.images[0]?.url || img}
                     alt="Card image cap"
                     onClick={() => navigate(`/${post._id}`)}
                     sx={{

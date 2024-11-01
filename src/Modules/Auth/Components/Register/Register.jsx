@@ -23,7 +23,7 @@ export default function Register() {
     console.log(data);
     try {
       const res = await axios.post(
-        "https://real-state-backend-mohamedfathy1991s-projects.vercel.app/api/auth/signup",
+        "https://api.aqaryminya.com/api/auth/signup",
         data,
         {
           headers: {
@@ -32,7 +32,9 @@ export default function Register() {
         }
       );
       console.log(res);
-      toast.success("Sign Up Successfully, OTP is sent to your email check your email");
+      toast.success(
+        "Sign Up Successfully, OTP is sent to your email check your email"
+      );
       nav("/auth/verify");
     } catch (error) {
       console.log(error);
@@ -49,7 +51,10 @@ export default function Register() {
               <h3 className="text-4xl">Register A New Seller</h3>
               <p>
                 If you already have an account,{" "}
-                <Link className="font-bold text-decoration-none text-danger" to={"/auth/login"}>
+                <Link
+                  className="font-bold text-decoration-none text-danger"
+                  to={"/auth/login"}
+                >
                   Login here
                 </Link>
                 !
@@ -62,13 +67,21 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="text"
-                      className={`form-control ${errors.firstName ? "is-invalid" : ""}`}
-                      {...register("firstName", { required: "First name is required" })}
+                      className={`form-control ${
+                        errors.firstName ? "is-invalid" : ""
+                      }`}
+                      {...register("firstName", {
+                        required: "First name is required",
+                      })}
                       id="firstName"
                       placeholder="First name"
                     />
                     <label htmlFor="firstName">First name</label>
-                    {errors.firstName && <div className="invalid-feedback">{errors.firstName.message}</div>}
+                    {errors.firstName && (
+                      <div className="invalid-feedback">
+                        {errors.firstName.message}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -77,13 +90,21 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="text"
-                      className={`form-control ${errors.lastName ? "is-invalid" : ""}`}
-                      {...register("lastName", { required: "Last name is required" })}
+                      className={`form-control ${
+                        errors.lastName ? "is-invalid" : ""
+                      }`}
+                      {...register("lastName", {
+                        required: "Last name is required",
+                      })}
                       id="lastName"
                       placeholder="Last name"
                     />
                     <label htmlFor="lastName">Last name</label>
-                    {errors.lastName && <div className="invalid-feedback">{errors.lastName.message}</div>}
+                    {errors.lastName && (
+                      <div className="invalid-feedback">
+                        {errors.lastName.message}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -92,13 +113,21 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="text"
-                      className={`form-control ${errors.phone ? "is-invalid" : ""}`}
-                      {...register("phone", { required: "Phone number is required" })}
+                      className={`form-control ${
+                        errors.phone ? "is-invalid" : ""
+                      }`}
+                      {...register("phone", {
+                        required: "Phone number is required",
+                      })}
                       id="phonenumber"
                       placeholder="Phone number"
                     />
                     <label htmlFor="phonenumber">Phone number</label>
-                    {errors.phone && <div className="invalid-feedback">{errors.phone.message}</div>}
+                    {errors.phone && (
+                      <div className="invalid-feedback">
+                        {errors.phone.message}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -107,11 +136,14 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="email"
-                      className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.email ? "is-invalid" : ""
+                      }`}
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
-                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                          value:
+                            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                           message: "Invalid email format",
                         },
                       })}
@@ -119,7 +151,11 @@ export default function Register() {
                       placeholder="name@example.com"
                     />
                     <label htmlFor="email">Email</label>
-                    {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
+                    {errors.email && (
+                      <div className="invalid-feedback">
+                        {errors.email.message}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -128,19 +164,26 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="password"
-                      className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.password ? "is-invalid" : ""
+                      }`}
                       {...register("password", {
                         required: "Password is required",
                         pattern: {
                           value: /^[1-9a-zA-Z]{3,10}$/,
-                          message: "Password must be 3-10 characters long and include letters and numbers",
+                          message:
+                            "Password must be 3-10 characters long and include letters and numbers",
                         },
                       })}
                       id="password"
                       placeholder="Password"
                     />
                     <label htmlFor="password">Password</label>
-                    {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
+                    {errors.password && (
+                      <div className="invalid-feedback">
+                        {errors.password.message}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -149,16 +192,24 @@ export default function Register() {
                   <div className="form-floating">
                     <input
                       type="password"
-                      className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.confirmPassword ? "is-invalid" : ""
+                      }`}
                       {...register("confirmPassword", {
                         required: "Confirm Password is required",
-                        validate: (value) => value === getValues("password") || "Passwords do not match",
+                        validate: (value) =>
+                          value === getValues("password") ||
+                          "Passwords do not match",
                       })}
                       id="confirmPassword"
                       placeholder="Confirm Password"
                     />
                     <label htmlFor="confirmPassword">Confirm Password</label>
-                    {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword.message}</div>}
+                    {errors.confirmPassword && (
+                      <div className="invalid-feedback">
+                        {errors.confirmPassword.message}
+                      </div>
+                    )}
                   </div>
                 </div>
 
