@@ -92,6 +92,7 @@ function Navbar() {
                     key={page.name}
                     component={Link}
                     to={page.link}
+                    onClick={toggleDrawer(false)}
                     sx={{ justifyContent: "center" }}
                   >
                     <Typography
@@ -100,6 +101,7 @@ function Navbar() {
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}
+                      
                     >
                       {page.name}
                     </Typography>

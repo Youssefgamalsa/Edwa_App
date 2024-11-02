@@ -67,7 +67,7 @@ export default function ShowAqar() {
       toast.success("Real State Created Successfully ");
     } catch (error) {
       console.log(error)
-      toast.error("Failed to Create");
+      toast.error(error.response.data.errorr);
     }
   };
   const handleOpenModal = (data) => {
