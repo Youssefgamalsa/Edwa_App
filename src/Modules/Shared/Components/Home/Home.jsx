@@ -12,7 +12,6 @@ import {
   Box,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-// import img from "../../../../assets/img/image.jpg"; // يمكنك استخدام الصورة الخاصة بك هنا
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -34,7 +33,8 @@ export default function CardComponent() {
 
   let { register, handleSubmit } = useForm();
 
-  const get_all_properity = async (pages, status) => {
+  // جلب جميع العقارات
+  const get_all_property = async (pages, stat) => {
     setLoad(true);
     try {
       let response = await axios.get(
@@ -42,7 +42,7 @@ export default function CardComponent() {
         {
           params: {
             page: pages,
-            status: status,
+            status: stat,
           },
         }
       );
@@ -54,19 +54,22 @@ export default function CardComponent() {
       setLoad(false);
     }
   };
+
+  // دالة البحث لتحديد حالة العقار
   const handle_search = (data) => {
-    console.log(data);
-    get_all_properity(page, data.status);
+    const status = data.status === "all" ? undefined : data.status; // حالة العقار
+    get_all_property(page, status);
   };
 
   useEffect(() => {
-    get_all_properity(1, "sell");
+    // جلب جميع العقارات عند التحميل الأول
+    get_all_property(1, undefined); // undefined لجلب جميع العقارات
     window.scrollTo(0, 20);
   }, []);
 
   const handleChange = (event, value) => {
     setPage(value);
-    get_all_properity(value);
+    get_all_property(value, undefined); // لجلب جميع العقارات
   };
 
   return (
@@ -84,7 +87,7 @@ export default function CardComponent() {
               <img
                 className="d-block w-100"
                 src={imag}
-                alt={`Slide ${index + 1}`}
+                alt={`Slide ${index + 1} `}
                 style={{
                   height: "300px",
                   objectFit: "cover",
@@ -99,20 +102,20 @@ export default function CardComponent() {
       <form onSubmit={handleSubmit(handle_search)}>
         <div className="search_bar shadow-lg d-flex flex-column flex-md-row">
           <select
-            className="form-select  w-100 w-md-20 text-center text-md-left"
+            className="form-select w-100 w-md-20 text-center text-md-left"
             style={{ width: "20%", margin: "auto" }}
             {...register("status")}
           >
-            <option>نوع العقد </option>
-            <option value="rent"> ايجار </option>
-            <option value="sell"> للبيع </option>
+            <option value="all">جميع العقارات</option>
+            <option value="rent">للإيجار</option>
+            <option value="sell">للبيع</option>
           </select>
           <button
             type="submit"
-            className=" btn btn-outline-danger w-100 w-md-20"
+            className="btn btn-outline-danger w-100 w-md-20"
             style={{ width: "20%", margin: "auto" }}
           >
-            بحث{" "}
+            بحث
           </button>
         </div>
       </form>
@@ -282,7 +285,6 @@ export default function CardComponent() {
           )}
         </Grid>
       )}
-
       <div
         style={{
           width: "85%",
